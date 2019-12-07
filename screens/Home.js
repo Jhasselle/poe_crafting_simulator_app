@@ -1,0 +1,38 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { AppBar, Button, Colors, DarkTheme, Provider as PaperProvider  } from 'react-native-paper';
+import { HomeBottomAppBar, HomeTopAppBar } from '../components/HomeAppBar';
+import { Feed } from '../components/Feed';
+import Store from '../store/store';
+
+export function Home(props) {
+
+    const store = Store.getInstance()
+
+    const [items, setItems] = useState(null)
+
+    useEffect(()=>{
+        store.getAllItems(setItems)
+    },[])
+
+    return (
+        <PaperProvider theme={DarkTheme}>
+                <HomeTopAppBar />
+                <View style={styles.background}>
+                    <Feed items={items} navigation={props.navigation}/>
+                    <Button color={Colors.red600} onPress={()=> store.nukeDatabase()}>nuke</Button>
+                </View>
+                <HomeBottomAppBar navigation={props.navigation}/>
+        </PaperProvider>
+    );
+}
+
+const styles = StyleSheet.create({
+    background: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingTop: 50,
+        paddingBottom: 50,
+        backgroundColor: '#1E2126'
+    },
+});

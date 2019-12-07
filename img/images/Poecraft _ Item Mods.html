@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)https://poecraft.com/itemmods -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen"></style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}</style><style class="darkreader darkreader--user-agent" media="screen">html {
+    background-color: #2f302f !important;
+}
+html, body, input, textarea, select, button {
+    background-color: #2f302f;
+}
+html, body, input, textarea, select, button {
+    border-color: #75736f;
+    color: #ffffff;
+}
+a {
+    color: #5fb0ff;
+}
+table {
+    border-color: #696763;
+}
+::placeholder {
+    color: #e3dac8;
+}
+::selection {
+    background-color: #2676d7;
+    color: #ffffff;
+}
+::-moz-selection {
+    background-color: #2676d7;
+    color: #ffffff;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: #70751e !important;
+    color: #ffffff !important;
+}
+::-webkit-scrollbar {
+    background-color: #343433;
+    color: #f0e7d7;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #434443;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #4d4e4c;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #595a59;
+}
+::-webkit-scrollbar-corner {
+    background-color: #2f302f;
+}
+* {
+    scrollbar-color: #434443 #343433;
+}</style>
+<title>Poecraft | Item Mods</title>
+<meta name="keywords" content="poecraft,path of exile,guides,tools,item,mods,lookup,stats,test,dps,edps,pdps,attack speed,crit chance,armor,armour,evasion,energy shield,es,quality,affix,suffix,prefix,item base,jewel,claw,dagger,sceptre,mace,one hand,two hand,staff,unique,magic,rare,normal,white">
+<meta name="description" content="Path of Exile Item Mod simulation and lookup tool. Find out what can roll and the best possible rolls, and how it will affect your item.">
+<meta property="og:image" content="http://web.poecdn.com/image/Art/2DItems/Currency/CurrencyRerollRare.png?scale=1&amp;w=1&amp;h=1">
+<link rel="shortcut icon" href="https://poecraft.com/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="./Poecraft _ Item Mods_files/base.css" type="text/css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="./Poecraft _ Item Mods_files/core.css" type="text/css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link href="./Poecraft _ Item Mods_files/css" rel="stylesheet">
+<link rel="stylesheet" href="./Poecraft _ Item Mods_files/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"><style class="darkreader darkreader--sync" media="screen"></style>
+<script async="" src="./Poecraft _ Item Mods_files/analytics.js"></script><script src="./Poecraft _ Item Mods_files/lodash.min.js"></script><style class="darkreader darkreader--override" media="screen">.jfk-bubble {
+    background-color: #141313 !important;
+}
+.vimvixen-hint {
+    background-color: #956e0b !important;
+    border-color: #fbd23d !important;
+    color: #ffffea !important;
+}</style>
+<script src="./Poecraft _ Item Mods_files/jquery.min.js"></script>
+<script src="./Poecraft _ Item Mods_files/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="./Poecraft _ Item Mods_files/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="./Poecraft _ Item Mods_files/lz-string.min.js"></script>
+<script src="./Poecraft _ Item Mods_files/util.js"></script>
+<script src="./Poecraft _ Item Mods_files/shim.min.js"></script>
+<script src="./Poecraft _ Item Mods_files/zone.min.js"></script>
+<script src="./Poecraft _ Item Mods_files/Reflect.js"></script>
+<script src="./Poecraft _ Item Mods_files/system.js"></script>
+<script src="./Poecraft _ Item Mods_files/Rx.system.min.js"></script>
+<script async="" src="./Poecraft _ Item Mods_files/f.txt"></script>
+<script>
+(function (i, s, o, g, r, a, m) {
+i['GoogleAnalyticsObject'] = r;
+i[r] = i[r] || function () {
+(i[r].q = i[r].q || []).push(arguments)
+}, i[r].l = 1 * new Date();
+a = s.createElement(o),
+m = s.getElementsByTagName(o)[0];
+a.async = 1;
+a.src = g;
+m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-42910144-1', 'auto');
+ga('send', 'pageview');
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "ca-pub-9934582166008645",
+enable_page_level_ads: true
+});
+</script>
+<style>html, body { height: 100%; overflow: auto; }</style><style class="darkreader darkreader--sync" media="screen"></style>
+<script>
+var USER_INFO = undefined;
+var version = "5f7aa282";
+System.config({
+paths: {
+'npm:': 'https://unpkg.com/',
+},
+bundles: {},
+map: {
+'app': '/js/app',
+'beta': '/js/app/beta',
+'util': '/js/lib',
+'@realm': window.beta ? '/js/app/beta' : '/js/app',
+'@angular/core': 'npm:@angular/core@5.2.11/bundles/core.umd.min.js',
+'@angular/common/http': 'npm:@angular/common@5.2.11/bundles/common-http.umd.min.js',
+'@angular/common': 'npm:@angular/common@5.2.11/bundles/common.umd.min.js',
+'@angular/compiler': 'npm:@angular/compiler@5.2.11/bundles/compiler.umd.min.js',
+'@angular/platform-browser': 'npm:@angular/platform-browser@5.2.11/bundles/platform-browser.umd.min.js',
+'@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic@5.2.11/bundles/platform-browser-dynamic.umd.min.js',
+'@angular/http': 'npm:@angular/http@5.2.11/bundles/http.umd.min.js',
+'@angular/router': 'npm:@angular/router@5.2.11/bundles/router.umd.min.js',
+'@angular/forms': 'npm:@angular/forms@5.2.11/bundles/forms.umd.min.js',
+'ngx-bootstrap': 'npm:ngx-bootstrap@2.0.3/bundles/ngx-bootstrap.umd.min.js',
+'ngx-smart-modal': 'npm:ngx-smart-modal@7.1.1/bundles/ngx-smart-modal.umd.js',
+'@angular/cli': 'npm:@angular/cli@5.2.11/bundles/core.umd.min.js',
+'@angular/upgrade': 'npm:@angular/upgrade@5.2.11/bundles/upgrade.umd.min.js',
+'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
+'ts': 'npm:plugin-typescript@4.0.10/lib/plugin.js',
+'tslib': 'npm:tslib@1.9.3/tslib.js',
+'typescript': 'npm:typescript@2.3.4/lib/typescript.js',
+},
+packages: {
+'app': {
+defaultExtension: 'js?v=' + version
+},
+'util': {
+defaultExtension: 'js'
+},
+'angular-in-memory-web-api': {
+main: './index.js',
+defaultExtension: 'js'
+}
+}
+});
+$(document).ready(function () {});
+</script>
+</head>
+<body class="">
+<div class="pc-fullscreen-container">
+<div class="u-flex-fixed">
+<script>
+var __leagueService = {
+SaveLeague: function() {
+var league = $('#league-selector').val();
+localStorage.setItem('poe-league', league);
+$('#league-dialog').modal('hide');
+},
+OpenLeagueDialogue: function() {
+var league = localStorage.getItem('poe-league');
+if(league) {
+$('#league-selector').val(league);
+}
+$('#league-dialog').modal('show');
+}
+};
+var __themeController = {
+applyTheme: function(theme) {
+switch(theme) {
+case "light":
+default:
+var cls = "";
+_.forEach(document.body.classList, function(s) {
+if(!s.startsWith("pc-theme-")) {
+cls += " " + s;
+}
+});
+document.body.className = cls;
+break;
+case "dark":
+document.body.className = "pc-theme-dark";
+break;
+}
+},
+setTheme: function(theme) {
+localStorage.setItem('theme', theme);
+__themeController.applyTheme(theme);
+}
+};
+__themeController.applyTheme(localStorage.getItem('theme') || 'light');
+</script>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-list" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle Menus">
+<span class="navbar-toggler-icon"></span>
+</button>-->
+<div class="navbar-header">
+<a class="navbar-brand logo-font" href="https://poecraft.com/">PoeCraft</a>
+</div>
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div id="navbar-list" class="collapse navbar-collapse">
+<ul class="nav navbar-nav mr-auto">
+<li class="nav-item dropdown">
+<a href="https://poecraft.com/itemmods#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data <span class="caret"></span></a>
+<div class="dropdown-menu">
+<!--
+<a class="dropdown-item" href="/gemplanner">Gem Planner</a>
+-->
+<a class="dropdown-item" href="https://poecraft.com/atlas">Atlas</a>
+<a class="dropdown-item" href="https://poecraft.com/itemmods">Item Mod Tool</a>
+</div>
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li id="nav-notification-dropdown" class="dropdown" style="display:none">
+<a href="https://poecraft.com/itemmods#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
+<div class="cm-dropdown-panel">
+<div class="cm-notification-panel">
+<div class="cm-notification-entry">
+<div class="cm-notification-title"></div>
+<div class="cm-notification-subheader"></div>
+<div class="cm-notification-body"></div>
+</div>
+</div>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a href="https://poecraft.com/itemmods#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
+<div class="dropdown-menu dropdown-menu-right">
+<div class="dropdown-header">Theme</div>
+<a class="dropdown-item" href="https://poecraft.com/itemmods#" onclick="__themeController.setTheme(&#39;light&#39;)">Light Theme <!--<i class="fa fa-sun-o" aria-hidden="true"></i>--></a>
+<a class="dropdown-item" href="https://poecraft.com/itemmods#" onclick="__themeController.setTheme(&#39;dark&#39;)">Dark Theme <!--<i class="fa fa-moon-o" aria-hidden="true"></i>--></a>
+<div role="separator" class="dropdown-divider"></div>
+<a class="dropdown-item" href="https://poecraft.com/itemmods#" onclick="__leagueService.OpenLeagueDialogue()">Set League</a>
+<div role="separator" class="dropdown-divider"></div>
+<a class="dropdown-item" href="https://poecraft.com/itemmods#" data-toggle="modal" data-target="#about-dialog">About</a>
+<a class="dropdown-item" href="https://poecraft.com/privacy">Privacy Policy</a>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://poecraft.com/login/pathofexile">Login</a>
+</li>
+</ul>
+</div>
+</nav>
+<div id="about-dialog" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">About</h4>
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+</div>
+<div class="modal-body">
+<div class="" style="padding: 20px">
+<p>
+This site is dedicated to providing tools for Path of Exile. The information on this site has been mostly data-mined from the game's files. There is still no guarantee that data mined files are consistent with the live server data. Use information on this site at your own risk. Any site feedback can be sent through <a href="https://docs.google.com/forms/d/e/1FAIpQLScX7QX4ezN5LDucdPFgAvGJrqmwcV9fi4JLVzsvfvGhkqVFbQ/viewform?usp=sf_link#response=ACYDBNho82u9BkTNxRkrCZ__JTF2f2CJ-WUnmxMIjA9ge17gMh0St4XBp-FwqfI">this form</a>.
+</p>
+<p>
+Various images included on the site are copyright to Grinding Gear Games. This site is in no way affiliated with Grinding Gear Games
+</p>
+<p>
+If you would like to support this site, consider turning off your Adblocker. There is also a patreon page if you would like to support it monetarily instead.
+</p>
+<div class="text-center"><a href="https://www.patreon.com/poecraft"><img src="./Poecraft _ Item Mods_files/become_a_patron_button.png"></a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="league-dialog" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Select a League</h4>
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+</div>
+<div class="modal-body">
+<div class="form-group">
+<label for="league-selector">League</label>
+<select id="league-selector" class="form-control">
+<option value="season_sc">Synthesis</option>
+<option value="season_hc">Synthesis Hardcore</option>
+<option value="standard">Standard</option>
+<option value="hardcore">Hardcore</option>
+</select>
+</div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary" onclick="__leagueService.SaveLeague()">Save</button>
+<button class="btn" data-dismiss="modal">Cancel</button>
+</div>
+</div>
+</div>
+</div> </div>
+<div class="pc-fullscreen-main">
+<script src="./Poecraft _ Item Mods_files/sprintf.min.js"></script>
+<style>html, body { height: 100%; overflow: auto; background-color: #dcdcdc }</style><style class="darkreader darkreader--sync" media="screen"></style>
+<script>System.import((window.beta ? 'beta' : 'app') + '/app.itemmods').then(null, console.error.bind(console));</script>
+<itemmods-app ng-version="5.2.11" class="im-container"><div class="im-header-container">
+    <div class="im-header">
+        <div class="row" style="margin-bottom: 4px">
+            <div class="col">
+                <div class="im-title">Item Mod Tool</div>
+                <div>Last updated 3.7.2.2</div>
+            </div>
+            <div class="col-auto">
+                <div pcad="" ng-reflect-ad-slot-id="6970883210" style="position: relative; width: 728px; height: 90px;"><div>
+<div style="position: relative; width: 728px; height: 90px; background-color: rgba(255, 0, 0, 0.06); --darkreader-inline-bgcolor:rgba(217, 31, 28, 0.06);" data-darkreader-inline-bgcolor=""><ins class="adsbygoogle" style="display:block;position:relative;width:728px;height:90px;;z-index:2" data-ad-client="ca-pub-9934582166008645" data-ad-slot="6970883210"></ins></div>
+<div style="display: initial; text-align: center; position: absolute; margin: auto; transform: translate(-50%, -50%); top: 50%; left: 50%; z-index: 1; transition: opacity 4s ease 0s; border-radius: 8px; padding: 6px; border: 2px dashed black; opacity: 1; --darkreader-inline-border-top:#86837e; --darkreader-inline-border-right:#86837e; --darkreader-inline-border-bottom:#86837e; --darkreader-inline-border-left:#86837e;" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">Please support this site by disabling your ad blocker.</div>
+</div></div>
+            </div>
+        </div>
+        <im-baselist class="im-baseitem-list-container" im-baselist="" tabindex="0" ng-reflect-items="[object Object],[object Object" ng-reflect-item-filters="[object Object],[object Object">
+        <div class="im-baseitem-list-toolbar" style="display:flex;">
+            <div class="u-flex-fixed">
+                <input style="width:200px;max-width:100%" type="search" ng-reflect-model="" placeholder="Search items by name" class="ng-untouched ng-pristine ng-valid">
+            </div>
+            <div class="u-flex-stretch im-baseitem-list-filter">
+                <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Life Flasks">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Flasks/lifeflask10"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Flasks/lifeflask10" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" hidden="" src="https://poecraft.com/itemmods" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" style="max-width: 38px; max-height: 38px;" width="47" height="95"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Mana Flasks">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Flasks/manaflask11"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Flasks/manaflask11" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" hidden="" src="https://poecraft.com/itemmods" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" style="max-width: 38px; max-height: 38px;" width="47" height="95"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Hybrid Flasks">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Flasks/hybridflask"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Flasks/hybridflask" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" hidden="" src="https://poecraft.com/itemmods" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" style="max-width: 38px; max-height: 38px;" width="47" height="95"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Amulets">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Amulets/Amulet7.pn"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Amulets/Amulet7.pn" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Amulet7.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Rings">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Rings/Ring7.png"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Rings/Ring7.png" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Ring7.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Claws">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Claw7.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Daggers">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Dagger8.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Wands">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Wand6.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="One Hand Swords">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/OneHandSword7.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Thrusting One Hand Swords">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Rapier7.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="One Hand Axes">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/OneHandAxe3.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="One Hand Maces">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/OneHandMace6.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Bows">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/TwoHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/TwoHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Bow2.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Staves">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/TwoHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/TwoHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Staff8.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Two Hand Swords">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/TwoHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/TwoHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/TwoHandSword7.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Two Hand Axes">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/TwoHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/TwoHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/TwoHandAxe5.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Two Hand Maces">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/TwoHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/TwoHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/TwoHandMace2.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Quivers">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Quivers/QuiverSpik"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Quivers/QuiverSpik" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/QuiverSpike-Point.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Belts">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Belts/Belt3.png"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Belts/Belt3.png" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Belt3.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Gloves">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Armours/Gloves/Fin"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Armours/Gloves/Fin" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/FingerlessSilkGloves.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Boots">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Armours/Boots/TwoT"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Armours/Boots/TwoT" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/TwoTonedBoots.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Body Armours">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Armours/BodyArmour"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Armours/BodyArmour" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/BodyStrDexInt1C.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Helmets">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Armours/Helmets/He"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Armours/Helmets/He" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/HelmetStr11.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Shields">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Armours/Shields/Sh"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Armours/Shields/Sh" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/ShieldDex6.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Sceptres">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/OneHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/OneHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/scepter4.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Utility Flasks">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Flasks/sprint.png"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Flasks/sprint.png" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" hidden="" src="https://poecraft.com/itemmods" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" style="max-width: 38px; max-height: 38px;" width="47" height="95"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Critical Utility Flasks">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Flasks/diamond.png"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Flasks/diamond.png" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" hidden="" src="https://poecraft.com/itemmods" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" style="max-width: 38px; max-height: 38px;" width="47" height="95"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Fishing Rods">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Weapons/TwoHandWea"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Weapons/TwoHandWea" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/FishingRod1.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Jewel">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Jewels/basicstr.pn"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Jewels/basicstr.pn" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/basicstr.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="Abyss Jewel">
+                    <!--bindings={
+  "ng-reflect-ng-if": "Art/2DItems/Jewels/MurderousEy"
+}--><poe-img ng-reflect-ng-style="[object Object]" ng-reflect-path="Art/2DItems/Jewels/MurderousEy" style="max-width: 38px; max-height: 38px;"><img ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/MurderousEye.png" style="max-width: 38px; max-height: 38px;"><canvas ng-reflect-ng-style="[object Object]" hidden="" style="max-width: 38px; max-height: 38px;"></canvas></poe-img>
+                    <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                </div><div class="btn btn-sm btn-primary active" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="AR">
+                    <!--bindings={}-->
+                    <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div>AR</div>
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="EV">
+                    <!--bindings={}-->
+                    <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div>EV</div>
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="ES">
+                    <!--bindings={}-->
+                    <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div>ES</div>
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="AR/EV">
+                    <!--bindings={}-->
+                    <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div>AR/EV</div>
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="AR/ES">
+                    <!--bindings={}-->
+                    <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div>AR/ES</div>
+                </div><div class="btn btn-sm btn-primary" style="padding:2px;margin-right:4px;margin-bottom:2px;border-radius:4px;float:left;min-width:40px;height:40px;text-align:center;display: flex;align-items: center;justify-content: center;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" title="EV/ES">
+                    <!--bindings={}-->
+                    <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div>EV/ES</div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="im-baseitem-list-wrapper">
+            <div class="im-baseitem-list" style="height: 0px;">
+                <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr7.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Pinnacle Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 467"
+}--><div>Armour: 467</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(20 to 30) to maximum Life"
+}--><div>+(20 to 30) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr6.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Colossal Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 632"
+}--><div>Armour: 632</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(10 to 20) to maximum Life"
+}--><div>+(10 to 20) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr5.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Ezomyte Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 522"
+}--><div>Armour: 522</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(30 to 40) to maximum Life"
+}--><div>+(30 to 40) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Ebony Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 412"
+}--><div>Armour: 412</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(20 to 30) to maximum Life"
+}--><div>+(20 to 30) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Shagreen Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 261"
+}--><div>Armour: 261</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(10 to 20) to maximum Life"
+}--><div>+(10 to 20) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr7.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Crested Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 338"
+}--><div>Armour: 338</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(20 to 30) to maximum Life"
+}--><div>+(20 to 30) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr6.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Girded Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 481"
+}--><div>Armour: 481</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(10 to 20) to maximum Life"
+}--><div>+(10 to 20) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr5.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Bronze Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 367"
+}--><div>Armour: 367</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(30 to 40) to maximum Life"
+}--><div>+(30 to 40) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Mahogany Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 265"
+}--><div>Armour: 265</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(20 to 30) to maximum Life"
+}--><div>+(20 to 30) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Buckskin Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 177"
+}--><div>Armour: 177</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(10 to 20) to maximum Life"
+}--><div>+(10 to 20) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr7.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Painted Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 217"
+}--><div>Armour: 217</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(20 to 30) to maximum Life"
+}--><div>+(20 to 30) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr6.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Reinforced Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 287"
+}--><div>Armour: 287</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(10 to 20) to maximum Life"
+}--><div>+(10 to 20) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr5.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Copper Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 191"
+}--><div>Armour: 191</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(30 to 40) to maximum Life"
+}--><div>+(30 to 40) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Cedar Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 108"
+}--><div>Armour: 108</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(20 to 30) to maximum Life"
+}--><div>+(20 to 30) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Rawhide Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 53"
+}--><div>Armour: 53</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(10 to 20) to maximum Life"
+}--><div>+(10 to 20) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr2.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Corroded Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 46"
+}--><div>Armour: 46</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(10 to 20) to maximum Life"
+}--><div>+(10 to 20) to maximum Life</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Shields/Sh"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/ShieldStr1.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Splintered Tower Shield</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 9"
+}--><div>Armour: 9</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr11.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Eternal Burgonet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 373"
+}--><div>Armour: 373</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr10.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Royal Burgonet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 377"
+}--><div>Armour: 377</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr9.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Ezomyte Burgonet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 346"
+}--><div>Armour: 346</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr8.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Samite Helmet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 276"
+}--><div>Armour: 276</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr7.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Siege Helmet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 237"
+}--><div>Armour: 237</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr6.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Reaver Helmet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 198"
+}--><div>Armour: 198</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr5.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Gladiator Helmet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 174"
+}--><div>Armour: 174</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Close Helmet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 130"
+}--><div>Armour: 130</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Barbute Helmet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 92"
+}--><div>Armour: 92</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr2.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Cone Helmet</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 38"
+}--><div>Armour: 38</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Helmets/He"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/HelmetStr1.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Iron Hat</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 9"
+}--><div>Armour: 9</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr3C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Glorious Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 776"
+}--><div>Armour: 776</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr2C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Gladiator Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 738"
+}--><div>Armour: 738</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr1C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Astral Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 711"
+}--><div>Armour: 711</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "+(8 to 12)% to all Elemental R"
+}--><div>+(8 to 12)% to all Elemental Resistances</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr2B.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Crusader Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 601"
+}--><div>Armour: 601</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr1B.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Golden Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 559"
+}--><div>Armour: 559</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr3C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Majestic Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 530"
+}--><div>Armour: 530</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr2C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Colosseum Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 491"
+}--><div>Armour: 491</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr1C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Sun Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 451"
+}--><div>Armour: 451</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr2B.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Battle Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 412"
+}--><div>Armour: 412</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr1B.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Bronze Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 373"
+}--><div>Armour: 373</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr3C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Lordly Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 353"
+}--><div>Armour: 353</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr2C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Arena Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 324"
+}--><div>Armour: 324</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr1C.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Full Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 284"
+}--><div>Armour: 284</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr2B.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">War Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 216"
+}--><div>Armour: 216</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr1B.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Copper Plate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 176"
+}--><div>Armour: 176</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr2A.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Chestplate</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 68"
+}--><div>Armour: 68</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/BodyArmour"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BodyStr1A.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Plate Vest</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 19"
+}--><div>Armour: 19</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Titan Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 241"
+}--><div>Armour: 241</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Vaal Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 220"
+}--><div>Armour: 220</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Goliath Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 177"
+}--><div>Armour: 177</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Ancient Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 151"
+}--><div>Armour: 151</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr2.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Antique Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 122"
+}--><div>Armour: 122</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Reinforced Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 109"
+}--><div>Armour: 109</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Plated Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 77"
+}--><div>Armour: 77</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr2.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Steel Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 32"
+}--><div>Armour: 32</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Boots/Boot"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/BootsStr1.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Iron Greaves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 6"
+}--><div>Armour: 6</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Spi"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/SpikedGloves.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Spiked Gloves</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 220"
+}--><div>Armour: 220</div>
+                            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div style="border-bottom: 1px solid black; margin: 0px 18px; --darkreader-inline-border-bottom:#86837e;" data-darkreader-inline-border-bottom=""></div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "(16 to 20)% increased Melee Da"
+}--><div>(16 to 20)% increased Melee Damage</div>
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Titan Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 242"
+}--><div>Armour: 242</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Vaal Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 232"
+}--><div>Armour: 232</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Goliath Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 174"
+}--><div>Armour: 174</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Ancient Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 154"
+}--><div>Armour: 154</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr2.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Antique Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 129"
+}--><div>Armour: 129</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr4.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Steel Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 116"
+}--><div>Armour: 116</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr3.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Bronze Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 77"
+}--><div>Armour: 77</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr2.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Plated Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 39"
+}--><div>Armour: 39</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div><div class="im-baseitem-entry">
+                    <div class="u-flex-fixed" style="position:relative;width:80px;height:100%;">
+                        <poe-img class="im-baseitem-image" ng-reflect-class="im-baseitem-image" ng-reflect-path="Art/2DItems/Armours/Gloves/Glo"><img class="im-baseitem-image" src="./Poecraft _ Item Mods_files/GlovesStr1.png"><canvas class="im-baseitem-image" hidden=""></canvas></poe-img>
+                        <div style="position:absolute;top:50%;transform: translate(0,-50%);width:100%">Iron Gauntlets</div>
+                    </div>
+                    <div class="u-flex-stretch" style="display: flex;flex-direction: column;align-items: center;justify-content:center">
+                        <div>
+                            <!--bindings={
+  "ng-reflect-ng-for-of": "Armour: 6"
+}--><div>Armour: 6</div>
+                            <!--bindings={}-->
+                            <!--bindings={}-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</im-baselist>
+    </div>
+</div>
+
+<!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><div class="im-item-body">
+    <item-affix-list class="im-item-affix-container" label="Prefix" ng-reflect--item-class="[object Object]" ng-reflect--base-affix-group="[object Object]" ng-reflect--affix-group="[object Object]" ng-reflect--modded-base-item="[object Object]" ng-reflect-label="Prefix" ng-reflect-events="[object Object]" ng-reflect--stat-reader="[object Object]" ng-reflect--weight="91300">
+    <div class="im-item-affix-group-header">
+        <div class="im-item-affix-group-title">Prefix</div>
+        <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div class="u-flex-fixed">
+            <div class="cm-button"><img class="cm-icon" src="./Poecraft _ Item Mods_files/hammer.png"><span style="vertical-align:top">Craft</span></div>
+        </div>
+    </div>
+    <!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><div class="im-item-affix-list">
+        <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to maximum Life</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to maximum Mana</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to maximum Energy Shield</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">Adds ## to ## Physical Damage to Attacks</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">Adds ## to ## Fire Damage to Attacks</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">Adds ## to ## Cold Damage to Attacks</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">Adds ## to ## Lightning Damage to Attacks</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% of Physical Attack Damage Leeched as Life</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Armour</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Evasion Rating</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased maximum Energy Shield</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Spell Damage</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Elemental Damage with Attack Skills</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% of Physical Attack Damage Leeched as Mana</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Rarity of Items found</div>
+            <!--bindings={}-->
+        </div>
+    </div>
+</item-affix-list>
+    <div class="im-item-main">
+        <div class="im-item-main-left">
+            <div style="width:100%;display: flex;flex-direction: column">
+                <!--bindings={}-->
+                <div class="itemPopupContainer newItemPopup rarePopup" style="z-index:10">
+                    
+                    <div class="itemHeader singleLine" ng-reflect-klass="itemHeader singleLine" ng-reflect-ng-class="[object Object]">
+                        <span class="l"></span>
+                        <div class="itemName"><span class="lc">Onyx Amulet</span></div>
+                        <span class="r"></span>
+                    </div>
+
+                    <!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><div style="padding-top:4px">
+
+                        
+                        <!--bindings={
+  "ng-reflect-ng-if": "0"
+}-->
+
+                        
+                        <!--bindings={}-->
+                        <!--bindings={}-->
+
+                        
+                        <!--bindings={}-->
+                        <!--bindings={}-->
+                        <!--bindings={}-->
+                        <!--bindings={}-->
+                        <!--bindings={}-->
+
+                        
+                        <!--bindings={
+  "ng-reflect-ng-if": "Requires Level <span class=\"po"
+}--><div>Requires Level <span class="poe-itemdesc-value">25</span></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div class="poe-itemdesc-break"></div>
+
+                        
+                        <!--bindings={
+  "ng-reflect-ng-if": "<div>+16 to all Attributes</di"
+}--><div class="poe-itemdesc-augmenttext"><div>+16 to all Attributes</div></div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "<div>+16 to all Attributes</di"
+}--><div class="poe-itemdesc-break"></div>
+
+                        
+                        <!--bindings={
+  "ng-reflect-ng-if": ""
+}-->
+                        <!--bindings={
+  "ng-reflect-ng-if": ""
+}-->
+
+                        
+                        <!--bindings={
+  "ng-reflect-ng-if": ""
+}-->
+                        <!--bindings={
+  "ng-reflect-ng-if": ""
+}-->
+                    </div>
+
+                    
+                    <poe-img class="im-item-spotlight-image" ng-reflect-ng-style="[object Object]" ng-reflect-class="im-item-spotlight-image" ng-reflect-path="Art/2DItems/Amulets/Amulet7.pn" style="--darkreader-inline-bgcolor: initial;"><img class="im-item-spotlight-image" ng-reflect-ng-style="[object Object]" src="./Poecraft _ Item Mods_files/Amulet7.png"><canvas class="im-item-spotlight-image" ng-reflect-ng-style="[object Object]" hidden=""></canvas></poe-img>
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+                <div class="im-item-mod-list" hidden="">
+                    <div class="im-item-mod-list-name">Prefixes</div>
+                    <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                </div>
+                <div class="im-item-mod-list" hidden="">
+                    <div class="im-item-mod-list-name">Suffixes</div>
+                    <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                </div>
+            </div>
+        </div>
+        <!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><div class="im-item-spotlight-summary">
+            
+            <div class="im-item-special-toolbar">
+                <div class="cm-button" title="Possible Corruptions">
+                    <img class="pc-icon" src="./Poecraft _ Item Mods_files/CurrencyVaal.png">
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div class="cm-button" title="Essence Menu">
+                    <img class="pc-icon" src="./Poecraft _ Item Mods_files/Horror1.png">
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "256"
+}--><div class="btn btn-sm btn-primary" style="background: url(&quot;https://www.pathofexile.com/image/inventory/ShaperBackground.png?w=1&amp;h=1&amp;x=0&amp;y=0&quot;) center center no-repeat; --darkreader-inline-bgcolor: initial;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" data-darkreader-inline-bgcolor="">
+                    <img src="./Poecraft _ Item Mods_files/ShaperItemSymbol.png">
+                </div>
+                <!--bindings={
+  "ng-reflect-ng-if": "257"
+}--><div class="btn btn-sm btn-primary" style="background: url(&quot;https://www.pathofexile.com/image/inventory/ElderBackground.png?w=1&amp;h=1&amp;x=0&amp;y=0&quot;) center center no-repeat; --darkreader-inline-bgcolor: initial;" ng-reflect-klass="btn btn-sm btn-primary" ng-reflect-ng-class="[object Object]" data-darkreader-inline-bgcolor="">
+                    <img src="./Poecraft _ Item Mods_files/ElderItemSymbol.png">
+                </div>
+
+                
+            </div>
+
+            <!--bindings={}-->
+
+            <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div class="im-item-stat-group">
+                <div class="im-item-stat-group-label">Implicits</div>
+                <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object]"
+}--><div class="im-item-stat-info">
+                    <div class="im-item-stat-value">16</div>
+                    <div class="im-item-stat-slider">
+                        <div class="im-item-stat-label">Additional All Attributes</div>
+                        <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><cm-slider ng-reflect-value="16" ng-reflect-max="16" ng-reflect-min="10"><div class="cm-slider-container"><div class="cm-slider-bar"><div style="position: absolute;top:100%;left:0;right:0;height:10px;"></div><div class="cm-slider-draggable" draggable="true" style="margin-left: 100%;"></div></div><div class="cm-slider-min-value">10</div><div class="cm-slider-max-value">16</div></div></cm-slider>
+                    </div>
+                </div>
+            </div>
+
+            <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+
+            <!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->
+        </div>
+    </div>
+    <item-affix-list class="im-item-affix-container" label="Suffix" ng-reflect--item-class="[object Object]" ng-reflect--base-affix-group="[object Object]" ng-reflect--affix-group="[object Object]" ng-reflect--modded-base-item="[object Object]" ng-reflect-label="Suffix" ng-reflect-events="[object Object]" ng-reflect--stat-reader="[object Object]" ng-reflect--weight="118200">
+    <div class="im-item-affix-group-header">
+        <div class="im-item-affix-group-title">Suffix</div>
+        <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div class="u-flex-fixed">
+            <div class="cm-button"><img class="cm-icon" src="./Poecraft _ Item Mods_files/hammer.png"><span style="vertical-align:top">Craft</span></div>
+        </div>
+    </div>
+    <!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><div class="im-item-affix-list">
+        <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to Strength</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to Dexterity</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to Intelligence</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to all Attributes</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Rarity of Items found</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Cast Speed</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## to Accuracy Rating</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">## Life Regenerated per second</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Mana Regeneration Rate</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Global Critical Strike Chance</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+##% to Fire Resistance</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+##% to Cold Resistance</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+##% to Lightning Resistance</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+##% to Chaos Resistance</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+##% to all Elemental Resistances</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+##% to Global Critical Strike Multiplier</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## Life gained for each Enemy hit by your Attacks</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Fire Damage</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Cold Damage</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">##% increased Lightning Damage</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## Life gained on Kill</div>
+            <!--bindings={}-->
+        </div><div class="im-item-affix-group">
+            <div class="im-item-affix-group-label">+## Mana gained on Kill</div>
+            <!--bindings={}-->
+        </div>
+    </div>
+</item-affix-list>
+</div>
+
+
+
+<div class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><strong>Corruption Options</strong></h4>
+            </div>
+            <div class="modal-body">
+                <!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><div class="im-item-craft-mod-list">
+                    <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><div class="im-item-craft-mod">
+                        You can apply an additional Curse
+                    </div><div class="im-item-craft-mod">
+                        (8 to 10)% increased Attack Speed
+                    </div><div class="im-item-craft-mod">
+                        (4 to 5)% Chance to Block Attack Damage
+                    </div><div class="im-item-craft-mod">
+                        Grants Level 21 Clarity Skill
+                    </div><div class="im-item-craft-mod">
+                        0.5% of Cold Damage Leeched as Life
+                    </div><div class="im-item-craft-mod">
+                        0.5% of Fire Damage Leeched as Life
+                    </div><div class="im-item-craft-mod">
+                        Grants Level 23 Malevolence Skill
+                    </div><div class="im-item-craft-mod">
+                        0.5% of Lightning Damage Leeched as Life
+                    </div><div class="im-item-craft-mod">
+                        +1% to all maximum Resistances
+                    </div><div class="im-item-craft-mod">
+                        (8 to 10)% increased Movement Speed
+                    </div><div class="im-item-craft-mod">
+                        (4 to 5)% Chance to Block Spell Damage
+                    </div><div class="im-item-craft-mod">
+                        Grants Level 23 Purity of Fire Skill
+                    </div><div class="im-item-craft-mod">
+                        Grants Level 23 Purity of Ice Skill
+                    </div><div class="im-item-craft-mod">
+                        Grants Level 23 Purity of Lightning Skill
+                    </div><div class="im-item-craft-mod">
+                        Grants Level 21 Purity of Elements Skill
+                    </div><div class="im-item-craft-mod">
+                        (20 to 24)% increased Elemental Damage with Attack Skills
+                    </div><div class="im-item-craft-mod">
+                        (20 to 30)% increased Rarity of Items found
+                    </div><div class="im-item-craft-mod">
+                        (3 to 5)% increased Quantity of Items found
+                    </div><div class="im-item-craft-mod">
+                        Wrath has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Anger has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Hatred has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Determination has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Discipline has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Grace has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Malevolence has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Zealotry has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        Pride has (15 to 20)% increased Aura Effect
+                    </div><div class="im-item-craft-mod">
+                        (4 to 6)% increased Dexterity / (4 to 6)% increased Intelligence
+                    </div><div class="im-item-craft-mod">
+                        (4 to 6)% increased Dexterity / (4 to 6)% increased Strength
+                    </div><div class="im-item-craft-mod">
+                        (4 to 6)% increased Strength / (4 to 6)% increased Intelligence
+                    </div><div class="im-item-craft-mod">
+                        +(14 to 16)% to all Elemental Resistances
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><strong>Essence Options</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div></div>
+                <!--bindings={
+  "ng-reflect-ng-if": ""
+}--><div class="im-item-craft-mod-list">
+                    <div>
+                        <label><input type="checkbox" ng-reflect-model="true" class="ng-untouched ng-pristine ng-valid"> Limit to Top Essence</label>
+                    </div>
+                    <pc-search-menu placeholder="Search essence name or stats" style="display:contents" ng-reflect-items="" ng-reflect-search-placeholder="Search essence name or stats" ng-reflect-search-function="essenceSearchFunction(ess, sea" ng-reflect-list-height="300"><div class="cm-search-menu-input-wrapper u-flex-fixed" style="padding-bottom:4px">
+    <input class="from-control ng-untouched ng-pristine ng-valid" style="" type="text" ng-reflect-model="" placeholder="Search essence name or stats">
+</div>
+<cm-vscroll style="display:contents" ng-reflect-items="" ng-reflect-list-height="300"><div style="overflow-y: scroll; position: relative; flex: 1 1 auto; height: 300px;" ng-reflect-ng-style="[object Object]">
+    <div style="width:1px"></div>
+    <div style="position:absolute;width:100%;top:0;left:0;display:flex;flex-direction:column">
+        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+    </div>
+</div></cm-vscroll></pc-search-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><strong>Craft Options</strong></h4>
+            </div>
+            <div class="modal-body">
+                <!--bindings={
+  "ng-reflect-ng-if": null
+}-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><strong>Tutorial </strong></h4>
+            </div>
+            <div class="modal-body">
+                <!--bindings={
+  "ng-reflect-ng-switch": "TutorialContext.slide"
+}-->
+                    <div>
+                        To select an item,
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div></itemmods-app>
+</div>
+</div>
+
+</body></html>
