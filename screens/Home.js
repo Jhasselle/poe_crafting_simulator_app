@@ -8,19 +8,26 @@ import Store from '../store/store';
 export function Home(props) {
 
     const store = Store.getInstance()
-
     const [items, setItems] = useState(null)
 
     useEffect(()=>{
+        // store.nukeDatabase()
+        props.navigation.addListener( 
+            'willFocus',
+            () => {
+                store.getAllItems(setItems)
+            }
+        );
         store.getAllItems(setItems)
-    },[])
+    },[props])
 
     return (
         <PaperProvider theme={DarkTheme}>
-                <HomeTopAppBar />
+                {/* <HomeTopAppBar /> */}
                 <View style={styles.background}>
                     <Feed items={items} navigation={props.navigation}/>
-                    <Button color={Colors.red600} onPress={()=> store.nukeDatabase()}>nuke</Button>
+                    {/* for debugging */}
+                    {/* <Button color={Colors.red600} onPress={()=> store.nukeDatabase()}>nuke</Button> */}
                 </View>
                 <HomeBottomAppBar navigation={props.navigation}/>
         </PaperProvider>

@@ -12,45 +12,24 @@ const goItemCraft = StackActions.reset({
 
 export function Loading(props) {
 
-    const store = Store.getInstance()
-    const item_class = props['navigation']['state']['params']['itemClass'];
-    const item_base = props['navigation']['state']['params']['itemBase'];
-    const endgame_type = props['navigation']['state']['params']['endgameType'];
+    const [store] = useState(Store.getInstance())
+    const item_uid = props['navigation']['state']['params']['item_uid'];
 
     useEffect(() => {
-        store.createItem(
-            props['navigation']['state']['params']['itemClass'], 
-            props['navigation']['state']['params']['itemBase'], 
-            props['navigation']['state']['params']['endgameType'],
-            navCallback)
+        // console.log('Loading Screen')
+        store.focusItem(item_uid, navigationCallback)
     }, []);
 
-    function navCallback(item_id){
-        // props.navigation.dispatch(goItemCraft, {'item':item});
-        props.navigation.navigate('ItemCraft', {'item_id':item_id});
-    }
-
-    function printTables() {
-        store.printAllTables();
-    }
-
-    function createItem() {
-        store.createItem(item_class, item_base, endgame_type);
-    }
-
-    function printItems() {
-        store.printAllItems();
+    function navigationCallback(item_uid){
+        // props.navigation.dispatch(goItemCraft, {'item_uid':item_uid});
+        props.navigation.navigate('ItemCraft', {'item_uid':item_uid});
     }
     
     return (
         <PaperProvider theme={DarkTheme}>
             <View style={styles.background}>
-                <Text>Creating Item</Text>
+                <Text>Generating Affixes</Text>
                 <ActivityIndicator animating={true} color={Colors.red600} size='large'/>
-                <Button onPress={printTables}>print all tables</Button>
-                <Button onPress={createItem}>create item</Button>
-                <Button onPress={printItems}>print items</Button>
-
             </View>
         </PaperProvider>
     

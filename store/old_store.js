@@ -1,34 +1,29 @@
-// Sandbox for new store singleton
+// Old, deleted after references no longer needed 
 
 import { AsyncStorage } from 'react-native';
-
-import mods from '../data/mods';
-// import base_items from '../data/base_items';
-// import stats from '../data/stats_english'
-
+import game_data from '../data/game_data';
+import affix_data from '../data/rings';
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("test.db");
 
-export default class NewStore {
+export default class Store {
 
     static instance = null;
     static isReady = false;
     static _constant_check_first_app_run = "initialized";
 
-    static currentItem = null;
-    static possibleMods = null;
 
     static getInstance(requester = 'unknown') {
-        if (NewStore.instance == null) {
-            NewStore.initialize_store();
-            NewStore.instance = new NewStore();
+        if (Store.instance == null) {
+            Store.initialize_store();
+            Store.instance = new Store();
         }
         return this.instance;
     }
 
     static async initialize_store() {
         try {
-            await NewStore.initialize_database_check()
+            await Store.initialize_database_check()
             let value = await AsyncStorage.getItem(this._constant_check_first_app_run);
             if (value === null) {
                 await AsyncStorage.setItem(this._constant_check_first_app_run, 'true');
@@ -50,10 +45,10 @@ export default class NewStore {
                 [],
                 (_, { rows: { _array } }) => {
                     if (_array.length == 0) {
-                        NewStore.create_app_tables();
+                        Store.create_app_tables();
                     }
                 },
-                NewStore.fail
+                Store.fail
             );
         });
     }
@@ -63,180 +58,23 @@ export default class NewStore {
         db.transaction(tx => {
             tx.executeSql(`create table if not exists app_metadata (id integer primary key not null, time_created int, user_id text, version float);`,
                 [],
-                NewStore.success,
-                NewStore.fail
+                Store.success,
+                Store.fail
             );
             tx.executeSql(`create table if not exists items (id integer primary key not null, uid integer, name text, class text, base text, rarity text, endgame_type text, prefixes text, suffixes text, groups text, image text);`,
                 [],
-                NewStore.success,
-                NewStore.fail
+                Store.success,
+                Store.fail
             );
             tx.executeSql(`create table if not exists item_json (id integer primary key not null, uid integer, data text);`,
                 [],
-                NewStore.success,
-                NewStore.fail
+                Store.success,
+                Store.fail
             );
         });
     }
 
-    // If item is going to have shaper, elder, etc tags, they must be included within itemTags
-    static generateItemMods(itemTags) {
-
-        let prefixArray = []
-        let suffixArray = []
-        let totalPrefixWeight = 0
-        let totalSuffixWeight = 0
-
-        for (var i = 0; i < mods.prefixes.length; i++) {
-
-            let valid = false
-            let restricted = false
-            let affixWeight = 0
-            
-            // Iterate through a mod's tags
-            for (var j = 0; j < mods.prefixes[i].spawn_weights.length; j++) {
-                
-                // Iterate through item's tags
-                for (var k = 0; k < itemTags.length; k++) {
-                    
-                    if (mods.prefixes[i].spawn_weights[j].tag == itemTags[k]) {
-
-                        if (mods.prefixes[i].spawn_weights[j].tag == 'default') {
-                            if (mods.prefixes[i].spawn_weights[j].weight > 0) {
-                                affixWeight += mods.prefixes[i].spawn_weights[j].weight
-                                valid = true
-                            }
-                        }
-                        // not default
-                        else {
-                            if (mods.prefixes[i].spawn_weights[j].weight == 0) {
-                                restricted = true
-                                break
-                            }
-                            else {
-                                valid = true
-                                affixWeight += mods.prefixes[i].spawn_weights[j].weight
-                            }
-                        }
-                    }
-                }
-
-                if (restricted) {
-                    valid = false
-                    break
-                }
-            }
-
-            if (valid) {
-                totalPrefixWeight += affixWeight
-                let mod = {
-                    'mod': mods.prefixes[i],
-                    'weight': affixWeight
-                }
-                prefixArray.push(mod)
-            }
-        }
-
-        for (var i = 0; i < mods.suffixes.length; i++) {
-
-            let valid = false
-            let restricted = false
-            let affixWeight = 0
-            
-            // Iterate through a mod's tags
-            for (var j = 0; j < mods.suffixes[i].spawn_weights.length; j++) {
-                
-                // Iterate through item's tags
-                for (var k = 0; k < itemTags.length; k++) {
-                    
-                    if (mods.suffixes[i].spawn_weights[j].tag == itemTags[k]) {
-
-                        if (mods.suffixes[i].spawn_weights[j].tag == 'default') {
-                            if (mods.suffixes[i].spawn_weights[j].weight > 0) {
-                                valid = true
-                                affixWeight += mods.suffixes[i].spawn_weights[j].weight
-                            }
-                        }
-                        // not default
-                        else {
-                            if (mods.suffixes[i].spawn_weights[j].weight == 0) {
-                                restricted = true
-                                break
-                            }
-                            else {
-                                valid = true
-                                affixWeight += mods.suffixes[i].spawn_weights[j].weight
-                            }
-                        }
-                    }
-                }
-
-                if (restricted) {
-                    valid = false
-                    break
-                }
-            }
-
-            if (valid) {
-                totalSuffixWeight += affixWeight
-                let mod = {
-                    'mod': mods.suffixes[i],
-                    'weight': affixWeight
-                }
-                suffixArray.push(mod)
-            }
-        }
-
-        let prefixes = {
-            'prefixArray':prefixArray,
-            'totalWeight':totalPrefixWeight
-        }
-
-        let suffixes = {
-            'suffixArray':suffixArray,
-            'totalWeight':totalSuffixWeight
-        }
-
-        let result = {
-            'prefixes':prefixes,
-            'suffixes':suffixes
-        }
-     
-        NewStore.possibleMods = {'prefixes':prefixes, 'suffixes':suffixes}
-        console.log(NewStore.possibleMods.prefixes.prefixArray.length)
-        console.log(NewStore.possibleMods.prefixes.totalWeight)
-        console.log(NewStore.possibleMods.suffixes.suffixArray.length)
-        console.log(NewStore.possibleMods.suffixes.totalWeight)
-    }
-
-    focusItem = async (item_uid, navCallback) => {
-        // get item from db
-
-        db.transaction(tx => {
-            tx.executeSql(
-                `select * from items where uid = ?;`,
-                [item_uid],
-                (_, _array) => { 
-                    NewStore.currentItem = _array[0]; 
-                    // This will be replaced with the item retrieved
-                    let tags = [ 
-                        "not_for_sale",
-                        "atlas_base_type",
-                        "ringatlas1",
-                        "ring",
-                        "default"
-                    ]
-                    NewStore.generateItemMods(tags)
-                    navCallback(item_uid)
-                },
-                (_, error) => { console.log('focusItem cannot find item') }
-            );
-        });
-    }
-
-    createItem = async (itemClass, itemBase, endgameType, navCallback) => {
-
-        // itemBase should be the only key needed, making itemClass unnecessary
+    createItem = async (itemClass, itemBase, endgameType, callback) => {
 
         var uid = Date.now();
         let name = itemBase.Name
@@ -244,21 +82,28 @@ export default class NewStore {
 
         let groups = []
         let image = itemBase.image;
-
         db.transaction(tx => {
             tx.executeSql(
                 `insert into items (uid, class, base, rarity, endgame_type) values (?, ?, ?, ?, ?);`,
                 [uid, itemClass, JSON.stringify(itemBase), rarity, endgameType],
-                (_, _array) => {
-                    NewStore.focusItem(uid, navCallback)
-                },
+                callback(uid),
                 (_, error) => { console.log(error) }
             );
+            // tx.executeSql(
+            //     `select * from items where uid = ?;`,
+            //     [item_id],
+            //     (_, { rows: { _array } }) => { 
+            //         _array[0]['base'] = JSON.parse(_array[0]['base'])
+            //         callback(_array[0])
+            //     },
+            //     // Store.success,
+            //     Store.fail
+            // );
         });
     }
 
 
-//  Crafting methods
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
     getRandomAffix = async (item) => {
         // console.log('getRandomAffix', item);
@@ -342,6 +187,12 @@ export default class NewStore {
                 if (!item.groups.includes(affix_data.mods[i].affix.CorrectGroup)) {
                     // The item's shaper or elder properties are respected.
 
+
+    
+
+
+                    
+
                     let affixRolls = []
                     for (let i = 0; i < affix_data.mods[i].affix.stats.length; i++) {
                         affixRolls.push(this.getRange(affix_data.mods[i].affix.stats[0].min, affix_data.mods[i].affix.stats[0].max))
@@ -354,9 +205,15 @@ export default class NewStore {
                         text: null,
                         rolls: null
                     }
+        
                     
+                    // console.log(stat_id)
+                    // console.log(game_data.statDescriptions[stat_id].def.key.condCount)
 
                     for (let i = 0; i < game_data.statDescriptions[stat_id].def.key.condCount; i++) {
+                        console.log('------------------------')
+
+                        console.log(game_data.statDescriptions[stat_id].def.key);
                 
                         if (game_data.statDescriptions[stat_id].def.key.conditions[0].param[0] == '1|#') {
                             console.log('before:', game_data.statDescriptions[stat_id].def.key.conditions[i].text)
@@ -463,6 +320,16 @@ export default class NewStore {
                 await callback({ ...item });
                 return
             }
+
+            // db.transaction(tx => {
+            //     tx.executeSql(
+            //         `insert into items (uid, class, base, rarity, endgame_type) values (?, ?, ?, ?, ?);`,
+            //         [uid, itemClass, JSON.stringify(itemBase), rarity, endgameType],
+            //         callback(uid),
+            //         (_, error)=>{console.log(error)}
+            //     );
+            // });
+
         }
     }
 
@@ -497,6 +364,16 @@ export default class NewStore {
             await this.local_scour(item)
             console.log('\after:', item)
             await this.transmutation(item, callback);
+            // await callback({...item})
+
+            // if (item.prefixes.length == 1 && item.suffixes.length == 0) {
+            //     await this.getAffix(item, 1, callback);
+            // }
+            // else if (item.prefixes.length == 0 && item.suffixes.length == 1) {
+            //     await this.getAffix(item, 2, callback);
+            // }
+            // else
+            //     return
         }
     }
 
@@ -620,6 +497,8 @@ export default class NewStore {
     }
 
 
+
+
     getItem = async (uid, setItem) => {
         db.transaction(tx => {
             tx.executeSql(
@@ -638,8 +517,8 @@ export default class NewStore {
                     }
                     setItem(_array[0]);
                 },
-                // NewStore.success,
-                NewStore.fail
+                // Store.success,
+                Store.fail
             );
         });
 
@@ -656,10 +535,34 @@ export default class NewStore {
                     }
                     callback(_array)
                 },
-                NewStore.fail
+                Store.fail
             );
         });
     }
+
+
+    // Object {
+    //     "$index": 607,
+    //     "CorrectGroup": "PhysicalDamage",
+    //     "Domain": 1,
+    //     "GenerationType": 1,
+    //     "Id": "AddedPhysicalDamage4",
+    //     "Level": 28,
+    //     "ModTypeKey": 14,
+    //     "Name": "Honed",
+    //     "stats": Array [
+    //       Object {
+    //         "key": 30,
+    //         "max": 6,
+    //         "min": 4,
+    //       },
+    //       Object {
+    //         "key": 31,
+    //         "max": 10,
+    //         "min": 9,
+    //       },
+    //     ],
+    // }
 
     getRandomMagicAffix = async (item) => {
 
@@ -676,6 +579,7 @@ export default class NewStore {
             this.getRandomAffix(item)
         }
     }
+
 
     // Helper functions
     getRandRangeTwo = () => {
@@ -695,7 +599,8 @@ export default class NewStore {
     }
 
 
-// Helper functions
+
+    // Helper functions
 
     // Returns a unique ID as a string.
     getUniqueID = async () => {
@@ -726,18 +631,16 @@ export default class NewStore {
         await AsyncStorage.clear();
     }
 
-
     printAllTables = async () => {
         db.transaction(tx => {
             tx.executeSql(
                 `select * from sqlite_master where type='table';`,
                 [],
                 (_, { rows: { _array } }) => { console.log(_array) },
-                NewStore.fail
+                Store.fail
             );
         });
     }
-
 
     printAllItems = async () => {
         db.transaction(tx => {
@@ -749,7 +652,7 @@ export default class NewStore {
                         _array[i]['base'] = JSON.parse(_array[i]['base'])
                     }
                 },
-                NewStore.fail
+                Store.fail
             );
         });
     }
@@ -762,3 +665,50 @@ export default class NewStore {
         console.log('fail');
     }
 }
+
+// Object {
+    //     "base": Object {
+    //       "$index": 2279,
+    //       "DropLevel": 59,
+    //       "Id": "Metadata/Items/Weapons/OneHandWeapons/OneHandAxes/OneHandAxe17",
+    //       "ItemClass": 11,
+    //       "Name": "Siege Axe",
+    //       "canSocket": true,
+    //       "height": 3,
+    //       "image": 66,
+    //       "implicits": Array [],
+    //       "maxSockets": 3,
+    //       "stats": Object {
+    //         "req": Object {
+    //           "dex": 82,
+    //           "int": 0,
+    //           "str": 119,
+    //         },
+    //         "weapon": Object {
+    //           "attackSpeed": 667,
+    //           "crit": 500,
+    //           "dMax": 70,
+    //           "dMin": 38,
+    //           "range": 11,
+    //         },
+    //       },
+    //       "tags": Array [
+    //         0,
+    //         8,
+    //         15,
+    //         23,
+    //         81,
+    //       ],
+    //       "width": 2,
+    //     },
+    //     "class": "One Hand Axe",
+    //     "endgame_type": "shaper",
+    //     "groups": null,
+    //     "id": 8,
+    //     "image": null,
+    //     "name": null,
+    //     "prefixes": null,
+    //     "rarity": "normal",
+    //     "suffixes": null,
+    //     "uid": 1573712118589,
+    //   }

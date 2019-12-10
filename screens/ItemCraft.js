@@ -1,28 +1,49 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BackHandler, TouchableHighlight, Image, StyleSheet, View } from 'react-native';
 import { AppBar, Button, DarkTheme, Text, Provider as PaperProvider } from 'react-native-paper';
+import { useNavigation, useFocusEffect, useFocusState} from 'react-navigation-hooks'
 import { HomeBottomAppBar, HomeTopAppBar } from '../components/HomeAppBar';
-import { Feed } from '../components/Feed';
 import { ItemHeader } from '../components/ItemHeader';
 import { CurrencyTray } from '../components/CurrencyTray';
+import img_dictionary from '../data/img_dictionary';
 import Store from '../store/store';
 
 export function ItemCraft(props) {
 
-    const [loaded, setLoaded] = useState(false);
     const store = Store.getInstance();
-    const item_id = props['navigation']['state']['params']['item_id'];
+    const item_uid = props['navigation']['state']['params']['item_uid'];
     const [item, setItem] = useState(null);
     const [currencySelected, setCurrencySelected] = useState(null);
+    const [itemImage, setItemImage] = useState(null)
+
+    // listen for item updates
+    useEffect(() => {
+        console.log('hehe', item)
+        if (item) {
+            console.log(item.item_base)
+            setItemImage(img_dictionary[item.item_base.visual_identity.id])
+        }
+        
+    }, [item]);
 
     useEffect(() => {
-        // console.log('ItemCraft');
-        // console.log(item)
-        if (!loaded) {
-            store.getItem(item_id, setItem);
-            setLoaded(true);
-        }
-    });
+        store.getItem(item_uid, setItem)
+    }, [props]);
+
+    // https://github.com/react-navigation/hooks how wunderbar.
+    // This and backHandler are to override the android hardward back button functionality
+    useFocusEffect(useCallback(() => {
+            const subscription = BackHandler.addEventListener('hardwareBackPress', backHandler);
+            return () => {
+                subscription.remove();
+            }
+    },[]));
+
+    const backHandler = () => {
+        props.navigation.popToTop()
+        return true
+    }
+
 
     return (
         <PaperProvider theme={DarkTheme}>
@@ -32,21 +53,13 @@ export function ItemCraft(props) {
                 <TouchableHighlight style={styles.background} onPress={useCurrency}>
                     <View style={styles.itemBox}>
 
-                        {item ? (
-                            <Text style={(item.rarity == 'normal') ? styles.normal : (item.rarity == 'magic') ? styles.magic : styles.rare}>{item.base.Name}</Text>
-                        )
-                         : null
-                        }
+                        <ItemHeader item={item} />
 
                         <Text>Prefixes</Text>
                         {item ? (
                             item.prefixes ? (
                                 item.prefixes.map((prefix) =>
-
-                                    {prefix.rolls ? 
-                                        <Text style={{color: 'cyan'}} key={prefix.affix.$index}>{prefix.rolls.text}</Text> 
-                                        :<Text>no prefix rolls</Text>
-                                    }           
+                                    <Text style={{ color: 'orange' }} key={prefix.name}>{prefix.rolls.description}</Text>
                                 )
                             ) : <Text>no prefixes</Text>
 
@@ -56,27 +69,16 @@ export function ItemCraft(props) {
                         {item ? (
                             item.suffixes ? (
                                 item.suffixes.map((suffix) =>
-                                    
-                                        {suffix.rolls ? 
-                                            <Text style={{color: 'orange'}} key={suffix.affix.$index}>{suffix.rolls.text}</Text> 
-                                            :<Text>no suffix rolls</Text>
-                                        }           
-                                    
+                                    <Text style={{ color: 'cyan' }} key={suffix.name}>{suffix.rolls.description}</Text>
                                 )
                             ) : <Text>no suffixes</Text>
-
                         ) : null}
 
-                    <Text>Groups</Text>
-                        {item ? (
-                            item.groups ? (
-                                item.groups.map((group) =>
-                                    <Text style={{color: 'green'}} key={group}> {group} </Text>
-                                )
-                            ) : <Text>no suffixes</Text>
-
-                        ) : null}
-
+                        <View>
+                            {itemImage ? <Image source={itemImage}/>
+                            : null}
+                        </View>
+                        
                     </View>
                 </TouchableHighlight>
                 <CurrencyTray currencySelected={currencySelected} setCurrencySelected={setCurrencySelected} />
@@ -90,35 +92,45 @@ export function ItemCraft(props) {
                 console.log(currencySelected);
                 break;
             case 'transmutation':
-                await(store.transmutation(item, setItem));
+                await (store.transmutation(item, setItem));
                 break;
             case 'alteration':
-                await(store.alteration(item, setItem));
+                await (store.alteration(item, setItem));
                 break;
             case 'augmentation':
-                await(store.augmentation(item, setItem));
+                await (store.augmentation(item, setItem));
                 break;
             case 'regal':
-                await(store.regal(item, setItem));
+                await (store.regal(item, setItem));
                 break;
             case 'alchemy':
-                await(store.alchemy(item, setItem));
+                await (store.alchemy(item, setItem));
                 break;
             case 'chaos':
-                await(store.chaos(item, setItem));
+                await (store.chaos(item, setItem));
                 break;
             case 'annul':
-                await(store.annul(item, setItem));
+                await (store.annul(item, setItem));
                 break;
             case 'exalt':
-                await(store.exalt(item, setItem));
+                await (store.exalt(item, setItem));
                 break;
             case 'scour':
-                await(store.scour(item, setItem));
+                await (store.scour(item, setItem));
                 break;
         }
     }
 }
+
+ItemCraft.navigationOptions = ({ navigation }) => {
+    return {
+        //   headerTitle: () => <Text>yo</Text>,
+        headerLeft: () => (
+            <Button onPress={() => navigation.popToTop()}>Home</Button>
+        ),
+    };
+}
+
 
 const styles = StyleSheet.create({
     background: {
@@ -132,14 +144,5 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: 'black',
-    },
-    normal: {
-        color: '#ffffff'
-    },
-    magic: {
-        color: 'blue'
-    },
-    rare: {
-        color: 'yellow'
     },
 });

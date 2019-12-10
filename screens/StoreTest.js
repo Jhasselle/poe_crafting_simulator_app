@@ -3,11 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import { AppBar, Button, Colors, Text, DarkTheme, Provider as PaperProvider  } from 'react-native-paper';
 import { HomeBottomAppBar, HomeTopAppBar } from '../components/HomeAppBar';
 import { Feed } from '../components/Feed';
-import NewStore from '../store/newStore';
+import Store from '../store/store';
 
 export function StoreTest(props) {
 
-    const store = NewStore.getInstance()
+    const store = Store.getInstance()
 
     const [items, setItems] = useState(null)
 
@@ -24,7 +24,7 @@ export function StoreTest(props) {
             "armour",
             "default"
         ]
-        NewStore.generateItemMods(tags)
+        Store.generateItemMods(tags)
     }
 
     const test_focus = async () => {

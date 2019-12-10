@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TouchableHighlight, Dimensions, ScrollView, StyleSheet, Text, Button, View } from 'react-native';
-import { List, Avatar, Card, Paragraph, TextInput, Title, Divider } from 'react-native-paper';
+import { TouchableHighlight, Dimensions, ScrollView, StyleSheet, Button, View } from 'react-native';
+import { List, Avatar, Card, Text, Paragraph, TextInput, Title, Divider } from 'react-native-paper';
 import { BaseItemCard } from './BaseItemCard';
 // import Store from './Store';
 
@@ -11,7 +11,8 @@ export function Feed(props) {
     const scrollViewRef = useRef(null);
 
     useEffect(() => {
-        scrollViewRef.current.scrollToEnd({ animated: true });
+        // scrollViewRef.current.scrollToEnd({ animated: true });
+        console.log(props)
     },[props]);
 
     return (
@@ -21,10 +22,11 @@ export function Feed(props) {
                 style={{ flexGrow: 1 }}
                 contentContainerStyle={{ alignItems: 'stretch' }}>
 
-                {props.items ? (
+                {props.items && props.items.length != 0? (
                     props.items.map((item) =>
-                        <BaseItemCard key={item.id} item={item} navigation={props.navigation}/>
-                    )): <Text>Empty</Text> 
+                        <BaseItemCard key={item.uid} item={item} navigation={props.navigation}/>
+                    ).reverse()
+                    ): <Text style={{fontSize: 20}}>No Items</Text> 
                 }
                 
             </ScrollView>

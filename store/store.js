@@ -1,17 +1,19 @@
-// Old, deleted after references no longer needed 
+// Sandbox for new store singleton
 
 import { AsyncStorage } from 'react-native';
-import game_data from '../data/game_data';
-import affix_data from '../data/rings';
+import _mods from '../data/mods';
+import _stats from '../data/stats';
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("test.db");
+
 
 export default class Store {
 
     static instance = null;
     static isReady = false;
     static _constant_check_first_app_run = "initialized";
-
+    static currentItem = null;
+    static possibleMods = null;
 
     static getInstance(requester = 'unknown') {
         if (Store.instance == null) {
@@ -61,7 +63,7 @@ export default class Store {
                 Store.success,
                 Store.fail
             );
-            tx.executeSql(`create table if not exists items (id integer primary key not null, uid integer, name text, class text, base text, rarity text, endgame_type text, prefixes text, suffixes text, groups text, image text);`,
+            tx.executeSql(`create table if not exists items (id integer primary key not null, uid integer, name text, item_base text, rarity text, endgame_tags text, prefixes text, suffixes text, groups text, image text);`,
                 [],
                 Store.success,
                 Store.fail
@@ -74,86 +76,187 @@ export default class Store {
         });
     }
 
-    createItem = async (itemClass, itemBase, endgameType, callback) => {
+    // If item is going to have shaper, elder, etc tags, they must be included within itemTags
+    static generateItemMods(itemTags) {
 
-        var uid = Date.now();
-        let name = itemBase.Name
-        let rarity = 'normal'
+        let prefixArray = []
+        let suffixArray = []
+        let totalPrefixWeight = 0
+        let totalSuffixWeight = 0
 
-        let groups = []
-        let image = itemBase.image;
+        for (var i = 0; i < _mods.prefixes.length; i++) {
+
+            let valid = false
+            let restricted = false
+            let affixWeight = 0
+
+            // Iterate through a mod's tags
+            for (var j = 0; j < _mods.prefixes[i].spawn_weights.length; j++) {
+
+                // Iterate through item's tags
+                for (var k = 0; k < itemTags.length; k++) {
+
+                    if (_mods.prefixes[i].spawn_weights[j].tag == itemTags[k]) {
+
+                        if (_mods.prefixes[i].spawn_weights[j].tag == 'default') {
+                            if (_mods.prefixes[i].spawn_weights[j].weight > 0) {
+                                affixWeight += _mods.prefixes[i].spawn_weights[j].weight
+                                valid = true
+                            }
+                        }
+                        // not default
+                        else {
+                            if (_mods.prefixes[i].spawn_weights[j].weight == 0) {
+                                restricted = true
+                                break
+                            }
+                            else {
+                                valid = true
+                                affixWeight += _mods.prefixes[i].spawn_weights[j].weight
+                            }
+                        }
+                    }
+                }
+
+                if (restricted) {
+                    valid = false
+                    break
+                }
+            }
+
+            if (valid) {
+                totalPrefixWeight += affixWeight
+                let mod = {
+                    'mod': _mods.prefixes[i],
+                    'weight': affixWeight
+                }
+                prefixArray.push(mod)
+            }
+        }
+
+        for (var i = 0; i < _mods.suffixes.length; i++) {
+
+            let valid = false
+            let restricted = false
+            let affixWeight = 0
+
+            // Iterate through a mod's tags
+            for (var j = 0; j < _mods.suffixes[i].spawn_weights.length; j++) {
+
+                // Iterate through item's tags
+                for (var k = 0; k < itemTags.length; k++) {
+
+                    if (_mods.suffixes[i].spawn_weights[j].tag == itemTags[k]) {
+
+                        if (_mods.suffixes[i].spawn_weights[j].tag == 'default') {
+                            if (_mods.suffixes[i].spawn_weights[j].weight > 0) {
+                                valid = true
+                                affixWeight += _mods.suffixes[i].spawn_weights[j].weight
+                            }
+                        }
+                        // not default
+                        else {
+                            if (_mods.suffixes[i].spawn_weights[j].weight == 0) {
+                                restricted = true
+                                break
+                            }
+                            else {
+                                valid = true
+                                affixWeight += _mods.suffixes[i].spawn_weights[j].weight
+                            }
+                        }
+                    }
+                }
+
+                if (restricted) {
+                    valid = false
+                    break
+                }
+            }
+
+            if (valid) {
+                totalSuffixWeight += affixWeight
+                let mod = {
+                    'mod': _mods.suffixes[i],
+                    'weight': affixWeight
+                }
+                suffixArray.push(mod)
+            }
+        }
+
+        let prefixes = {
+            'prefixArray': prefixArray,
+            'totalWeight': totalPrefixWeight
+        }
+
+        let suffixes = {
+            'suffixArray': suffixArray,
+            'totalWeight': totalSuffixWeight
+        }
+
+        let result = {
+            'prefixes': prefixes,
+            'suffixes': suffixes
+        }
+
+        Store.possibleMods = { 'prefixes': prefixes, 'suffixes': suffixes }
+    }
+
+    focusItem = async (item_uid, navigation_callback) => {
+        // get item from db
+
         db.transaction(tx => {
             tx.executeSql(
-                `insert into items (uid, class, base, rarity, endgame_type) values (?, ?, ?, ?, ?);`,
-                [uid, itemClass, JSON.stringify(itemBase), rarity, endgameType],
-                callback(uid),
+                `select * from items where uid = ? limit 1;`,
+                [item_uid],
+                (_, { rows: { _array } }) => {
+                    let item_base = JSON.parse(_array[0]['item_base'])
+                    // let endgame_tags = JSON.parse(_array[0]['endgame_tags'])
+                    let tags = item_base.tags
+                    Store.generateItemMods(tags)
+                    navigation_callback(item_uid)
+                },
+                (_, error) => { console.log('focusItem cannot find item') }
+            );
+        });
+    }
+
+    // TODO: find what endgame type an item is based on its tags
+    createItem = async (item_base, endgame_tags, navigation_callback) => {
+
+        let item_uid = Date.now()
+        let name = ''
+        let rarity = 'normal'
+        let groups = []
+        // let image = item_base.image;
+
+        db.transaction(tx => {
+            tx.executeSql(
+                `insert into items (uid, item_base, name, rarity, endgame_tags) values (?, ?, ?, ?, ?);`,
+                [item_uid, JSON.stringify(item_base), name, rarity, JSON.stringify(endgame_tags)],
+                (_, _array) => {
+                    // Navigates to loading screen
+                    navigation_callback(item_uid)
+                },
                 (_, error) => { console.log(error) }
             );
-            // tx.executeSql(
-            //     `select * from items where uid = ?;`,
-            //     [item_id],
-            //     (_, { rows: { _array } }) => { 
-            //         _array[0]['base'] = JSON.parse(_array[0]['base'])
-            //         callback(_array[0])
-            //     },
-            //     // Store.success,
-            //     Store.fail
-            // );
         });
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////
-
-    getRandomAffix = async (item) => {
-        // console.log('getRandomAffix', item);
-        sumOfWeight = 0;
-        randomWeight = this.getRandomWeight(affix_data['total_weight']);
-
-        for (let i = 0; i < affix_data['mods'].length; i++) {
-            sumOfWeight += affix_data['mods'][i]['weight'];
-
-            // 1) Check if the weight threshold has been met.
-            if (sumOfWeight >= randomWeight) {
-
-                // 2) Check to see if the random affix meets the following criteria:
-
-                // 2.a) Does not exist in the "correct groups" set of the existing item.
-                //      If it does, reroll.
-
-                // 2.b) The item have space for a prefix or suffix.
-
-                // 2.c) The item's shaper or elder properties are respected.
-
-                // ??? What to do if we reach the end of the affix_data without a match? --> Reroll
+    //  Crafting methods
 
 
-                let key = affix_data['mods'][i]['affix']['stats'][0]['key'];
-                let stat_id = game_data['stats'][key.toString()]['id'];
-
-                if (affix_data.mods[i].affix.GenerationType == 1) {
-                    item.prefixes.push(affix_data['mods'][i])
-                    item.groups.push(affix_data.mods[i].affix.CorrectGroup)
-                }
-                else {
-                    item.suffixes.push(affix_data['mods'][i])
-                    item.groups.push(affix_data.mods[i].affix.CorrectGroup)
-                }
-                break
-            }
-        }
-
-        // return item;
-    }
-
-
-    // affixType cases: 
+    // TODO: 1) have this be a single source to determine whether prefixes or suffixes are allowed
+    //       2) don't allow forcing
+    //  affixType cases: 
     //      0 = look at item's state and determine affix type automatically
     //      1 = force prefix
     //      2 = force suffix
-    getAffix = async (item, affixType, callback) => {
+    getAffix = async (item, affixType = 0, callback) => {
 
         if (item.prefixes.length == 3 && item.suffixes.length == 3) {
+            // Has maximum affixes
             return
         }
 
@@ -168,138 +271,144 @@ export default class Store {
                 //not pigeon-holed, randomly decide
                 affixType = this.getRandRangeTwo();
             }
-
         }
 
-        console.log('getAffix')
-        let sumOfWeight = 0;
-        let randomWeight = this.getRandomWeight(affix_data['total_weight']);
-
-        for (let i = 0; i < affix_data['mods'].length; i++) {
-
-            sumOfWeight += affix_data['mods'][i]['weight'];
-            // 1) Check if the weight threshold has been met.
-            if (sumOfWeight >= randomWeight && affix_data.mods[i].affix.GenerationType == affixType) {
-
-                
-                // Does not exist in the "correct groups" set of the existing item.
-                //  If it does, reroll.
-                if (!item.groups.includes(affix_data.mods[i].affix.CorrectGroup)) {
-                    // The item's shaper or elder properties are respected.
-
-
-    
-
-
-                    
-
-                    let affixRolls = []
-                    for (let i = 0; i < affix_data.mods[i].affix.stats.length; i++) {
-                        affixRolls.push(this.getRange(affix_data.mods[i].affix.stats[0].min, affix_data.mods[i].affix.stats[0].max))
-                    }
-
-
-                    let key = affix_data['mods'][i]['affix']['stats'][0]['key'];
-                    let stat_id = game_data['stats'][key.toString()]['id'];
-                    let stats = { 
-                        text: null,
-                        rolls: null
-                    }
-        
-                    
-                    // console.log(stat_id)
-                    // console.log(game_data.statDescriptions[stat_id].def.key.condCount)
-
-                    for (let i = 0; i < game_data.statDescriptions[stat_id].def.key.condCount; i++) {
-                        console.log('------------------------')
-
-                        console.log(game_data.statDescriptions[stat_id].def.key);
-                
-                        if (game_data.statDescriptions[stat_id].def.key.conditions[0].param[0] == '1|#') {
-                            console.log('before:', game_data.statDescriptions[stat_id].def.key.conditions[i].text)
-                            let text = game_data.statDescriptions[stat_id].def.key.conditions[0].text.replace('%1%%', affixRolls[i])
-                            console.log('after:', text)
-
-                            let stats = {
-                                text: text,
-                                rolls: affixRolls
-                            }
-                            console.log(stats)
-                        }
-                        else if (game_data.statDescriptions[stat_id].def.key.conditions[0].param[0] == '#') {
-                            let text = game_data.statDescriptions[stat_id].def.key.conditions[0].text.replace('%1$+d', '+' + affixRolls[i]);
-                            
-                            console.log('text:', text)       
-
-                            stats = {
-                                text: text,
-                                rolls: affixRolls
-                            }
-                            console.log(stats)
-                        }
-                        else if (game_data.statDescriptions[stat_id].def.key.conditions[0].param[0] == '1|99') {
-                            let text = game_data.statDescriptions[stat_id].def.key.conditions[0].text.replace('%1%%', affixRolls[i]);
-                            
-                            console.log('text:', text)       
-
-                            stats = {
-                                text: text,
-                                rolls: affixRolls
-                            }
-                            console.log(stats)
-                        }
-                        else {
-                            console.log('REEEEEEEEEEEEEEEEEEEEe:', )
-                            let text = game_data.statDescriptions[stat_id].def.key.conditions[0].text
-                            stats = {
-                                text: text,
-                                rolls: affixRolls
-                            }
-
-                            console.log(game_data.statDescriptions[stat_id].def.key.conditions[0].param[0])
-                            console.log(game_data.statDescriptions[stat_id].def.key.conditions[0].text)
-                        }
-                    }
-
-                    console.log('affix rolls:', affixRolls)
-
-
-
-                    let newAffix = affix_data['mods'][i]
-                    newAffix['rolls'] = stats;
-                    
-                    console.log(newAffix)
-
-                    if (affixType == 1) {
-                        item.prefixes.push(newAffix)
-                    }
-                    else {
-                        item.suffixes.push(newAffix)
-                    }
-
-                    item.groups.push(affix_data.mods[i].affix.CorrectGroup)
-                    await callback({ ...item})
-                    break
-                }
-                else {
-                    console.log(affix_data.mods[i].affix.CorrectGroup, ' already exists in item.group')
-                }
-            }
-
-            // What to do if we reach the end of the affix_data without a match? --> Reroll
-            if (i + 1 == affix_data['mods'].length) {
-                return this.getAffix(item, affixType, callback);
-            }
-        }
-
-        return item;
-
+        affixType == 1 ? this._getPrefix(item, callback) : this._getSuffix(item, callback)
     }
 
 
-    transmutation = async (item, callback) => {
+    _getPrefix = async (item, callback) => {
 
-        // console.log(item);
+        let found = false
+
+        while (!found) {
+
+            let sumOfWeight = 0
+            let affixTotalWeight = Store.possibleMods.prefixes.totalWeight
+            let randomWeight = this.getRandomWeight(affixTotalWeight)
+
+            for (let i = 0; i < Store.possibleMods.prefixes.prefixArray.length; i++) {
+
+                sumOfWeight += Store.possibleMods.prefixes.prefixArray[i].weight
+    
+                if (sumOfWeight >= randomWeight) {
+    
+                    if (!item.groups.includes(Store.possibleMods.prefixes.prefixArray[i].mod.group)) {
+    
+                        let newAffix = Store.possibleMods.prefixes.prefixArray[i].mod
+                        let stats = this.rollModStats(newAffix)
+    
+                        newAffix['rolls'] = stats;
+                        item.prefixes.push(newAffix)
+                        item.groups.push(Store.possibleMods.prefixes.prefixArray[i].mod.group)
+                        await callback({ ...item })
+                        found = true
+
+                        db.transaction(tx => {
+                            tx.executeSql(
+                                `update items set item_base=?, name=?, rarity=?, endgame_tags=?, prefixes=?, suffixes=? where uid=?;`,
+                                [JSON.stringify(item.item_base), item.name, item.rarity, JSON.stringify(item.endgame_tags), JSON.stringify(item.prefixes), JSON.stringify(item.suffixes), item.uid]
+                            );
+                        });
+
+                        break
+                    }
+                }
+            }
+        }
+    }
+
+
+    _getSuffix = async (item, callback) => {
+
+        let found = false
+
+        while (!found) {
+
+            let sumOfWeight = 0
+            let affixTotalWeight = Store.possibleMods.suffixes.totalWeight
+            let randomWeight = this.getRandomWeight(affixTotalWeight)
+
+            for (let i = 0; i < Store.possibleMods.suffixes.suffixArray.length; i++) {
+
+                sumOfWeight += Store.possibleMods.suffixes.suffixArray[i].weight
+    
+                if (sumOfWeight >= randomWeight) {
+    
+                    if (!item.groups.includes(Store.possibleMods.suffixes.suffixArray[i].mod.group)) {
+    
+                        let newAffix = Store.possibleMods.suffixes.suffixArray[i].mod
+                        let stats = this.rollModStats(newAffix)
+    
+                        newAffix['rolls'] = stats;
+                        item.suffixes.push(newAffix)
+                        item.groups.push(Store.possibleMods.suffixes.suffixArray[i].mod.group)
+                        await callback({ ...item })
+                        found = true
+
+                        db.transaction(tx => {
+                            tx.executeSql(
+                                `update items set item_base=?, name=?, rarity=?, endgame_tags=?, prefixes=?, suffixes=? where uid=?;`,
+                                [JSON.stringify(item.item_base), item.name, item.rarity, JSON.stringify(item.endgame_tags), JSON.stringify(item.prefixes), JSON.stringify(item.suffixes), item.uid]
+                            );
+                        });
+
+                        break
+                    }
+                }
+            }
+        }
+    }
+
+    // TODO: refactor commented out code
+    rollModStats = (mod) => {
+
+        let stat_description = ''
+        let rolls = []
+
+        for (let i = 0; i < mod.stats.length; i++) {
+            if (mod.stats[i].id in _stats) {
+
+                for (let j = 0; j < mod.stats.length; j++) {
+
+                    let roll = this.getRange(mod.stats[j].min, mod.stats[j].max)
+
+                    if (_stats[mod.stats[i].id].English[0].index_handlers[0][0] == 'divide_by_one_hundred') {
+                        roll = roll / 100
+
+                    }
+                    else if (_stats[mod.stats[i].id].English[0].index_handlers[0][0] == 'per_minute_to_per_second') {
+                        roll = (roll / 60).toFixed(2)
+                    }
+
+                    rolls.push(roll)
+                }
+
+                i == 0 ? stat_description = _stats[mod.stats[i].id].English[0].string : stat_description += '\n' + _stats[mod.stats[i].id].English[0].string
+            }
+        }
+
+        // meme.isThisSpaghetti?
+        if (rolls.length == 1) {
+            stat_description = stat_description.replace('{0}', rolls[0])
+        }
+        else if (rolls.length == 2) {
+            stat_description = stat_description.replace('{0}', rolls[0])
+            stat_description = stat_description.replace('{1}', rolls[1])
+        }
+        else if (rolls.length == 4) {
+            stat_description = stat_description.replace('{0}', rolls[0])
+            stat_description = stat_description.replace('{0}', rolls[1])
+        }
+
+        let stat = {
+            'description': stat_description,
+        }
+
+        return stat
+    }
+
+    transmutation = async (item, callback) => {
 
         if (item['rarity'] != 'normal') {
             return
@@ -308,39 +417,25 @@ export default class Store {
 
             item['rarity'] = 'magic'
 
-            await this.getRandomAffix(item)
-
             let numOfAffixes = this.getRandRangeTwo()
+            let initialAffixType = this.getRandRangeTwo();
 
-            if (numOfAffixes == 2) {
-                await this.augmentation(item, callback)
-                return
+            // initial affix is randomly a prefix or suffix
+            await this.getAffix(item, initialAffixType, callback)
+
+            if (numOfAffixes > 1) {
+                // agumentation will be sure to select the affix type that is not the initial
+                this.augmentation(item, callback)
             }
-            else {
-                await callback({ ...item });
-                return
-            }
-
-            // db.transaction(tx => {
-            //     tx.executeSql(
-            //         `insert into items (uid, class, base, rarity, endgame_type) values (?, ?, ?, ?, ?);`,
-            //         [uid, itemClass, JSON.stringify(itemBase), rarity, endgameType],
-            //         callback(uid),
-            //         (_, error)=>{console.log(error)}
-            //     );
-            // });
-
         }
     }
 
+
     augmentation = async (item, callback) => {
         if (item.rarity != 'magic') {
-            console.log('augmentation() called BUT item.rarity is not magic')
             return
         }
         else {
-            console.log('augmentation() called and item is magic')
-
             if (item.prefixes.length == 1 && item.suffixes.length == 0) {
                 await this.getAffix(item, 2, callback);
             }
@@ -352,28 +447,15 @@ export default class Store {
         }
     }
 
+
     alteration = async (item, callback) => {
 
         if (item.rarity != 'magic') {
-            console.log('alteration() called BUT item.rarity is not magic')
             return
         }
         else {
-
-            console.log('\tbefore:', item)
             await this.local_scour(item)
-            console.log('\after:', item)
             await this.transmutation(item, callback);
-            // await callback({...item})
-
-            // if (item.prefixes.length == 1 && item.suffixes.length == 0) {
-            //     await this.getAffix(item, 1, callback);
-            // }
-            // else if (item.prefixes.length == 0 && item.suffixes.length == 1) {
-            //     await this.getAffix(item, 2, callback);
-            // }
-            // else
-            //     return
         }
     }
 
@@ -413,9 +495,6 @@ export default class Store {
             return
         }
         else {
-            // choose between 3 and 6 affixes
-            // console.log('chaos', item)
-            console.log('chaos')
             await this.local_scour(item)
             await this.alchemy(item, callback)
         }
@@ -429,32 +508,27 @@ export default class Store {
         let cont = true;
         let groupName = ''
 
-        // console.log('annul', totalLength, randomIndex)
-
         for (var i = 0; i < prefixLength; i++) {
             if (i == randomIndex) {
-                groupName = item.prefixes[i].affix.CorrectGroup
-                console.log(item.prefixes[i].affix.CorrectGroup)
-                console.log(item.groups)
+                groupName = item.prefixes[i].group
                 item.prefixes.splice(i, 1)
                 cont = false;
                 break;
-               
+
             }
         }
 
         if (cont) {
             for (var j = 0; j < suffixLength; j++) {
                 if (i + j == randomIndex) {
-                    groupName = item.suffixes[j].affix.CorrectGroup
+                    groupName = item.suffixes[j].group
                     item.suffixes.splice(j, 1)
                     break;
                 }
             }
         }
 
-        for (var k = 0; k < item.groups.length; k++){
-            console.log('test', item.groups[k])
+        for (var k = 0; k < item.groups.length; k++) {
             if (item.groups[k] == groupName) {
                 item.groups.splice(k, 1);
                 break;
@@ -492,37 +566,42 @@ export default class Store {
         item.rarity = 'normal'
 
         callback({ ...item })
-
-        console.log('scour', item)
     }
 
 
-
-
-    getItem = async (uid, setItem) => {
+    getItem = async (item_uid, setItem) => {
         db.transaction(tx => {
             tx.executeSql(
                 `select * from items where uid = ?;`,
-                [uid],
+                [item_uid],
                 (_, { rows: { _array } }) => {
-                    _array[0]['base'] = JSON.parse(_array[0]['base'])
+                    _array[0]['endgame_tags'] = JSON.parse(_array[0]['endgame_tags'])
+                    _array[0]['item_base'] = JSON.parse(_array[0]['item_base'])
+
                     if (!_array[0]['groups']) {
                         _array[0]['groups'] = []
                     }
+
                     if (!_array[0]['prefixes']) {
                         _array[0]['prefixes'] = []
                     }
+                    else {
+                        _array[0]['prefixes'] = JSON.parse(_array[0]['prefixes'])
+                    }
+
                     if (!_array[0]['suffixes']) {
                         _array[0]['suffixes'] = []
                     }
+                    else {
+                        _array[0]['suffixes'] = JSON.parse(_array[0]['suffixes'])
+                    }
                     setItem(_array[0]);
                 },
-                // Store.success,
                 Store.fail
             );
         });
-
     }
+
 
     getAllItems = async (callback) => {
         db.transaction(tx => {
@@ -531,7 +610,10 @@ export default class Store {
                 [],
                 (_, { rows: { _array } }) => {
                     for (var i = 0; i < _array.length; i++) {
-                        _array[i]['base'] = JSON.parse(_array[i]['base'])
+                        _array[i]['endgame_tags'] = JSON.parse(_array[i]['endgame_tags'])
+                        _array[i]['item_base'] = JSON.parse(_array[i]['item_base'])
+                        _array[i]['prefixes'] = JSON.parse(_array[i]['prefixes'])
+                        _array[i]['suffixes'] = JSON.parse(_array[i]['suffixes'])
                     }
                     callback(_array)
                 },
@@ -539,47 +621,6 @@ export default class Store {
             );
         });
     }
-
-
-    // Object {
-    //     "$index": 607,
-    //     "CorrectGroup": "PhysicalDamage",
-    //     "Domain": 1,
-    //     "GenerationType": 1,
-    //     "Id": "AddedPhysicalDamage4",
-    //     "Level": 28,
-    //     "ModTypeKey": 14,
-    //     "Name": "Honed",
-    //     "stats": Array [
-    //       Object {
-    //         "key": 30,
-    //         "max": 6,
-    //         "min": 4,
-    //       },
-    //       Object {
-    //         "key": 31,
-    //         "max": 10,
-    //         "min": 9,
-    //       },
-    //     ],
-    // }
-
-    getRandomMagicAffix = async (item) => {
-
-        if (item.prefixes.length == 1 && item.prefixes.length == 1) {
-            return;
-        }
-        else if (item.affixes.prefixes.length == 1) {
-            this.getSuffix(item)
-        }
-        else if (item.affixes.suffixes.length == 1) {
-            this.getPrefix(item)
-        }
-        else {
-            this.getRandomAffix(item)
-        }
-    }
-
 
     // Helper functions
     getRandRangeTwo = () => {
@@ -599,13 +640,12 @@ export default class Store {
     }
 
 
-
     // Helper functions
 
     // Returns a unique ID as a string.
     getUniqueID = async () => {
         try {
-            value = null;
+            let value = null;
 
             while (value == null) {
 
@@ -631,6 +671,7 @@ export default class Store {
         await AsyncStorage.clear();
     }
 
+
     printAllTables = async () => {
         db.transaction(tx => {
             tx.executeSql(
@@ -642,6 +683,7 @@ export default class Store {
         });
     }
 
+
     printAllItems = async () => {
         db.transaction(tx => {
             tx.executeSql(
@@ -649,7 +691,7 @@ export default class Store {
                 [],
                 (_, { rows: { _array } }) => {
                     for (var i = 0; i < _array.length; i++) {
-                        _array[i]['base'] = JSON.parse(_array[i]['base'])
+                        _array[i]['item_base'] = JSON.parse(_array[i]['item_base'])
                     }
                 },
                 Store.fail
@@ -665,50 +707,3 @@ export default class Store {
         console.log('fail');
     }
 }
-
-// Object {
-    //     "base": Object {
-    //       "$index": 2279,
-    //       "DropLevel": 59,
-    //       "Id": "Metadata/Items/Weapons/OneHandWeapons/OneHandAxes/OneHandAxe17",
-    //       "ItemClass": 11,
-    //       "Name": "Siege Axe",
-    //       "canSocket": true,
-    //       "height": 3,
-    //       "image": 66,
-    //       "implicits": Array [],
-    //       "maxSockets": 3,
-    //       "stats": Object {
-    //         "req": Object {
-    //           "dex": 82,
-    //           "int": 0,
-    //           "str": 119,
-    //         },
-    //         "weapon": Object {
-    //           "attackSpeed": 667,
-    //           "crit": 500,
-    //           "dMax": 70,
-    //           "dMin": 38,
-    //           "range": 11,
-    //         },
-    //       },
-    //       "tags": Array [
-    //         0,
-    //         8,
-    //         15,
-    //         23,
-    //         81,
-    //       ],
-    //       "width": 2,
-    //     },
-    //     "class": "One Hand Axe",
-    //     "endgame_type": "shaper",
-    //     "groups": null,
-    //     "id": 8,
-    //     "image": null,
-    //     "name": null,
-    //     "prefixes": null,
-    //     "rarity": "normal",
-    //     "suffixes": null,
-    //     "uid": 1573712118589,
-    //   }

@@ -1,67 +1,66 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import { AppBar, Avatar, Button, DarkTheme, List, Checkbox, Provider as PaperProvider } from 'react-native-paper';
-import { Feed } from '../components/Feed';
-import itemClasses from '../data/item_classes';
+// import Store from '../store/store';
+import base_items from '../data/base_items';
+
 
 export function ItemBase(props) {
 
+    // const []
 
-
-    useEffect(() => {
-
-    })
-
-    function navigationCallback() {
-
+    const navigateToEndgameSelection = (base) => {
+        props.navigation.navigate('ItemEndgameSelection', {'item_base':base});
     }
 
     return (
         <PaperProvider theme={DarkTheme}>
             <View style={styles.background}>
-                {/* <Button onPress={() => props.navigation.navigate('ItemCraft')}>
-                    go to ItemCraft
-                </Button> */}
                 <ScrollView
                     style={{ flexGrow: 1 }}
                     contentContainerStyle={{ alignItems: 'stretch' }}>
 
-                    {itemClasses ? (
-                        itemClasses.map((item) =>
-                            <List.Accordion
-                                key={item.index}
-                                title={item.name}
-                                left={() => 
-                                    <Avatar.Image 
-                                        size={60} 
-                                        source={item.image}/>
-                                }>
+                    { 
+                        base_items ? (
+                            base_items.map((item) => 
+                                // <Text>{item.item_class}</Text>
+                                <List.Accordion
+                                    key={item.item_class}
+                                    title={item.item_class}
+                                    titleStyle={{fontSize: 20}}
+                                    onPress={()=>{console.log('accordian pressed')}}
+                                    // left={() => 
+                                    //     <Avatar.Image 
+                                    //         size={60} 
+                                    //         source={item.image}
+                                    //     />
+                                    //     }
+                                    >
 
                                 {
-                                    item.baseItems.map((baseItem)=>
+                                    item.base_items.map((base)=>
                                         <List.Item 
-                                            key={baseItem.$index}
-                                            title={baseItem.Name} 
-                                            onPress={() => props.navigation.navigate('Loading', {itemClass:item.Id, itemBase:baseItem, endgameType:'shaper'})}
-                                            left={()=>
-                                                <Avatar.Image 
-                                                    size={60} 
-                                                    source={baseItem.image} 
-                                                />
-                                            }
+                                            style={{paddingLeft: 30}}
+                                            key={base.name}
+                                            title={base.name} 
+                                            onPress={() => navigateToEndgameSelection(base)}
+                                            // left={()=>
+                                            //     <Avatar.Image 
+                                            //         size={60} 
+                                            //         source={baseItem.image} 
+                                            //     />
+                                            // }
                                         />
                                     )
                                 }
                             
                             </List.Accordion>
-
-                        )) : <Text>Empty</Text>
+                            )
+                    
+                        ): <Text>Loading</Text>
                     }
 
                 </ScrollView>
-
-
-
             </View>
         </PaperProvider>
     );
