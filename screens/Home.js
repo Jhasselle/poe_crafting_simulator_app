@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AppBar, Button, Colors, DarkTheme, Provider as PaperProvider  } from 'react-native-paper';
-import { HomeBottomAppBar, HomeTopAppBar } from '../components/HomeAppBar';
+import { HomeHeader } from '../components/HomeHeader'
+import { HomeBottomAppBar } from '../components/HomeAppBar';
 import { Feed } from '../components/Feed';
 import Store from '../store/store';
 
@@ -23,7 +24,7 @@ export function Home(props) {
 
     return (
         <PaperProvider theme={DarkTheme}>
-                {/* <HomeTopAppBar /> */}
+                <HomeHeader />
                 <View style={styles.background}>
                     <Feed items={items} navigation={props.navigation}/>
                     {/* for debugging */}

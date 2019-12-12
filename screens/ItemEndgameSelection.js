@@ -56,16 +56,15 @@ export function ItemEndgameSelection(props) {
                 if (selectedEndgameTags.includes('shaper') || selectedEndgameTags.includes('elder')) {
                     result = [endgameType]
                 }
-                // 
-                // // This is for 3.9 endgame types, uncomment when new item affixes are released
-                // /
-                // else if (selectedEndgameTags.length <= 1) {
-                //     result = [...selectedEndgameTags, endgameType]
-                // }
-                // else {
-                //     result = [selectedEndgameTags[1]]
-                //     result.push(endgameType)
-                // }
+                
+                // This is for 3.9 endgame types, uncomment when new item affixes are released
+                else if (selectedEndgameTags.length <= 1) {
+                    result = [...selectedEndgameTags, endgameType]
+                }
+                else {
+                    result = [selectedEndgameTags[1]]
+                    result.push(endgameType)
+                }
             }
         }
 

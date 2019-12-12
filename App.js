@@ -23,9 +23,9 @@ const AppNavigator = createStackNavigator({
         },
         Home: {
             screen: Home,
-            // navigationOptions: {
-            //     header: null,
-            // }
+            navigationOptions: {
+                header: null,
+            }
         },
         ItemBase: {
             screen: ItemBase
@@ -34,7 +34,10 @@ const AppNavigator = createStackNavigator({
             screen: ItemEndgameSelection
         },
         ItemCraft: {
-            screen: ItemCraft
+            screen: ItemCraft,
+            navigationOptions: {
+                header: null,
+            }
         },
         
     },

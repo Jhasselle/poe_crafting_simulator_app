@@ -2,17 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { Dimensions, ImageBackground, TouchableOpacity, StyleSheet, Text, View, Button, Image } from 'react-native';
 import img_dictionary from '../data/img_dictionary';
 
-export function ItemHeader(props) {
+export function ItemHeader({item}) {
 
     const [endgameTags, setEndgameTags] = useState([])
     const [leftEndgameImg, setLeftEndgameImg] = useState(null)
     const [rightEndgameImg, setRightEndgameImg] = useState(null) 
 
+    const [leftHeader, setLeftHeader] = useState(null)
+    const [middleHeader, setMiddleHeader] = useState(null)
+    const [rightHeader, setRightHeader] = useState(null)
+
     useEffect(()=>{
-        if (props.item) {
-            setEndgameTags(props.item.endgame_tags)
+        if (item) {
+            setEndgameTags(item.endgame_tags)
+            if (item.rarity == 'normal') {
+                setLeftHeader(img_dictionary['header-normal-left'])
+                setMiddleHeader(img_dictionary['header-normal-middle'])
+                setRightHeader(img_dictionary['header-normal-right'])
+            }
+            else if (item.rarity == 'magic') {
+                setLeftHeader(img_dictionary['header-magic-left'])
+                setMiddleHeader(img_dictionary['header-magic-middle'])
+                setRightHeader(img_dictionary['header-magic-right'])
+            }
+            else {
+                setLeftHeader(img_dictionary['header-rare-left'])
+                setMiddleHeader(img_dictionary['header-rare-middle'])
+                setRightHeader(img_dictionary['header-rare-right'])
+            }
+
         }    
-    }, [props])
+    }, [item])
 
     useEffect(()=>{
         if (endgameTags.length == 1) {
@@ -30,36 +50,57 @@ export function ItemHeader(props) {
     
     return (
         <View style={styles.titleFrame}>
-            <ImageBackground 
-                source={require('../img/frame/title-frame-left.png')} 
-                style={styles.edge} 
-                imageStyle={{ resizeMode: 'stretch' }}>
+            {   leftHeader
+                ?   <ImageBackground 
+                        source={leftHeader} 
+                        style={styles.edge} 
+                        imageStyle={{ resizeMode: 'stretch' }}>
 
-                {leftEndgameImg ? <Image source={leftEndgameImg}/>
-                : null} 
+                    {   leftEndgameImg 
+                        ? <Image source={leftEndgameImg}/>
+                        : null
+                    } 
+                    </ImageBackground>
+                : null
+            }
+        
+            {   middleHeader
+                ?   <ImageBackground 
+                        source={middleHeader} 
+                        style={styles.center} 
+                        imageStyle={{ resizeMode: 'stretch' }}>
 
-            </ImageBackground>
+                        {/* I was too anamored with whether I could, I never stopped to ask if I should. */}
+                        {   item 
+                            ?   item.rarity == 'rare'
+                                ?   <View style={styles.center}>
+                                        <Text style={styles.rare}>{item.name}</Text>
+                                        <Text style={styles.rare}>{item.item_base.name}</Text>
+                                    </View>
+                                :   item.rarity == 'magic'
+                                    ?   <Text style={styles.magic}>{item.name}</Text>
+                                    :   item.rarity == 'normal'
+                                        ? <Text style={styles.normal}>{item.item_base.name}</Text>
+                                        : null
+                            : null
+                        }
+                        </ImageBackground>
+                    : null
+                }
 
-            <ImageBackground source={require('../img/frame/title-frame.png')} style={styles.center} imageStyle={{ resizeMode: 'stretch' }}>
-                {/* <Text style={stylesTitleBar.text}>{props.item.name}</Text>
-                <Text style={stylesTitleBar.text}>{props.item.base}</Text> */}
-                {props.item ? (
-                    <Text style={(props.item.rarity == 'normal') ? styles.normal : (props.item.rarity == 'magic') ? styles.magic : styles.rare}>
-                        {props.item.name} {props.item.item_base.name}
-                    </Text>
-                ) : null}
+            {   rightHeader
+                ?   <ImageBackground 
+                        source={rightHeader} 
+                        style={styles.edge} 
+                        imageStyle={{ resizeMode: 'stretch' }}>
 
-            </ImageBackground>
-
-            <ImageBackground 
-                source={require('../img/frame/title-frame-right.png')} 
-                style={styles.edge} 
-                imageStyle={{ resizeMode: 'stretch' }}>
-
-                {rightEndgameImg ? <Image source={rightEndgameImg}/>
-                : null} 
-                
-            </ImageBackground>
+                        {   rightEndgameImg 
+                            ? <Image source={rightEndgameImg}/>
+                            : null
+                        } 
+                    </ImageBackground>
+                : null
+            }
 
         </View>
     )
@@ -70,7 +111,6 @@ var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     edge: {
         flex: 1,
-        backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -78,7 +118,6 @@ const styles = StyleSheet.create({
         flex: 6,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'green'
     },
     titleFrame: {
         flexDirection: 'row',
@@ -86,19 +125,24 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'center',
         height: height / 12,
-        marginLeft: 50,
-        marginRight: 50,
+        marginLeft: 10,
+        marginRight: 10,
     },
     normal: {
-        fontSize: 18,
+        fontFamily: 'Fontin-SmallCaps',
+        fontSize: 20,
         color: '#ffffff'
     },
     magic: {
-        fontSize: 18,
-        color: 'blue'
+        fontFamily: 'Fontin-SmallCaps',
+        fontSize: 20,
+        color: 'cyan',
+        position: 'absolute',
     },
     rare: {
-        fontSize: 18,
+        fontFamily: 'Fontin-SmallCaps',
+        fontSize: 20,
         color: 'yellow'
     },
+    
 });

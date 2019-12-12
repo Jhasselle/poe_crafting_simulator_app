@@ -11,8 +11,6 @@ export function Feed(props) {
     const scrollViewRef = useRef(null);
 
     useEffect(() => {
-        // scrollViewRef.current.scrollToEnd({ animated: true });
-        console.log(props)
     },[props]);
 
     return (

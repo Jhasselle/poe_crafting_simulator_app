@@ -3,6 +3,7 @@
 import { AsyncStorage } from 'react-native';
 import _mods from '../data/mods';
 import _stats from '../data/stats';
+import _names from '../data/rare_names';
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("test.db");
 
@@ -243,10 +244,6 @@ export default class Store {
         });
     }
 
-
-    //  Crafting methods
-
-
     // TODO: 1) have this be a single source to determine whether prefixes or suffixes are allowed
     //       2) don't allow forcing
     //  affixType cases: 
@@ -273,7 +270,9 @@ export default class Store {
             }
         }
 
-        affixType == 1 ? this._getPrefix(item, callback) : this._getSuffix(item, callback)
+        affixType == 1 
+            ? this._getPrefix(item, callback) 
+            : this._getSuffix(item, callback)
     }
 
 
@@ -296,6 +295,7 @@ export default class Store {
                     if (!item.groups.includes(Store.possibleMods.prefixes.prefixArray[i].mod.group)) {
     
                         let newAffix = Store.possibleMods.prefixes.prefixArray[i].mod
+                        // console.log(Store.possibleMods.prefixes.prefixArray[i])
                         let stats = this.rollModStats(newAffix)
     
                         newAffix['rolls'] = stats;
@@ -339,7 +339,7 @@ export default class Store {
     
                         let newAffix = Store.possibleMods.suffixes.suffixArray[i].mod
                         let stats = this.rollModStats(newAffix)
-    
+                        
                         newAffix['rolls'] = stats;
                         item.suffixes.push(newAffix)
                         item.groups.push(Store.possibleMods.suffixes.suffixArray[i].mod.group)
@@ -360,17 +360,22 @@ export default class Store {
         }
     }
 
-    // TODO: refactor commented out code
+    // TODO:
+    // Add rolls stat object (to accomodate divine orb functionality).
     rollModStats = (mod) => {
 
-        let stat_description = ''
+        let descriptions = {text:[], rolls:[]} 
         let rolls = []
 
         for (let i = 0; i < mod.stats.length; i++) {
+            
             if (mod.stats[i].id in _stats) {
+
+                rolls = []
 
                 for (let j = 0; j < mod.stats.length; j++) {
 
+                    
                     let roll = this.getRange(mod.stats[j].min, mod.stats[j].max)
 
                     if (_stats[mod.stats[i].id].English[0].index_handlers[0][0] == 'divide_by_one_hundred') {
@@ -384,39 +389,51 @@ export default class Store {
                     rolls.push(roll)
                 }
 
-                i == 0 ? stat_description = _stats[mod.stats[i].id].English[0].string : stat_description += '\n' + _stats[mod.stats[i].id].English[0].string
+                descriptions.text.push(_stats[mod.stats[i].id].English[0].string)
             }
+            descriptions.rolls = rolls
         }
 
-        // meme.isThisSpaghetti?
-        if (rolls.length == 1) {
-            stat_description = stat_description.replace('{0}', rolls[0])
+        if (descriptions.text.length >= 1) {
+            if (descriptions.rolls.length == 1) {
+                switch(_stats[mod.stats[0].id].English[0].format[0]) {
+                    case '+#%': 
+                        descriptions.text[0] = descriptions.text[0].replace('{0}', '+' + descriptions.rolls[0] + '%')
+                        break
+                    case '+#': 
+                        descriptions.text[0] = descriptions.text[0].replace('{0}', '+' + descriptions.rolls[0])
+                        break
+                    default: 
+                        descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
+                }
+            }
+            else if (descriptions.rolls.length == 2) {
+                descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
+                descriptions.text[0] = descriptions.text[0].replace('{1}', descriptions.rolls[1])
+            }
         }
-        else if (rolls.length == 2) {
-            stat_description = stat_description.replace('{0}', rolls[0])
-            stat_description = stat_description.replace('{1}', rolls[1])
-        }
-        else if (rolls.length == 4) {
-            stat_description = stat_description.replace('{0}', rolls[0])
-            stat_description = stat_description.replace('{0}', rolls[1])
+        if (descriptions.text.length == 2) {
+            // console.log('hmmm', _stats[mod.stats[0].id].English[0])
         }
 
         let stat = {
-            'description': stat_description,
+            'description': descriptions,
+            'added_phys': 0,
+            'increased_phys': 0,
+            'increased_speed': 0,
+            'increased_crit': 0
         }
 
         return stat
     }
 
-    transmutation = async (item, callback) => {
 
-        if (item['rarity'] != 'normal') {
+    transmutation = async (item, callback) => {
+        if (item.rarity != 'normal') {
             return
         }
         else {
-
-            item['rarity'] = 'magic'
-
+            item.rarity = 'magic'
             let numOfAffixes = this.getRandRangeTwo()
             let initialAffixType = this.getRandRangeTwo();
 
@@ -424,9 +441,14 @@ export default class Store {
             await this.getAffix(item, initialAffixType, callback)
 
             if (numOfAffixes > 1) {
-                // agumentation will be sure to select the affix type that is not the initial
+                // augmentation will be sure to select the affix type that is not the initial
                 this.augmentation(item, callback)
             }
+            else {
+                // augmentation will call this as well
+                await this.generateMagicName(item, callback)
+            }
+            
         }
     }
 
@@ -438,12 +460,12 @@ export default class Store {
         else {
             if (item.prefixes.length == 1 && item.suffixes.length == 0) {
                 await this.getAffix(item, 2, callback);
+                await this.generateMagicName(item, callback)
             }
             else if (item.prefixes.length == 0 && item.suffixes.length == 1) {
                 await this.getAffix(item, 1, callback);
+                await this.generateMagicName(item, callback)
             }
-            else
-                return
         }
     }
 
@@ -465,24 +487,24 @@ export default class Store {
             return
         }
         else {
+            item.name = this.getRareName()
             item.rarity = 'rare'
             let newAffixType = this.getRandRangeTwo();
             await this.getAffix(item, newAffixType, callback)
-            // callback({...item})
         }
     }
+
 
     alchemy = async (item, callback) => {
         if (item.rarity != 'normal') {
             return
         }
         else {
+            item.name = this.getRareName()
             item.rarity = 'rare'
-            // between 4 and 6 new affixes
             let numOfAffixes = this.getRandRange(3) + 4
 
             while (numOfAffixes > 0) {
-
                 await this.getAffix(item, 0, callback)
                 numOfAffixes--
             }
@@ -500,24 +522,26 @@ export default class Store {
         }
     }
 
+
+    // TODO: optimize how affix to remove is selected
     annul = async (item, callback) => {
         let prefixLength = item.prefixes.length
         let suffixLength = item.suffixes.length
         let totalLength = prefixLength + suffixLength
-        let randomIndex = this.getRandRange(totalLength)
         let cont = true;
         let groupName = ''
+        let randomIndex = this.getRandRange(totalLength)
 
+        // Prefixes and Suffixes are in two different arrays,
+        // This can be optimized
         for (var i = 0; i < prefixLength; i++) {
             if (i == randomIndex) {
                 groupName = item.prefixes[i].group
                 item.prefixes.splice(i, 1)
                 cont = false;
                 break;
-
             }
         }
-
         if (cont) {
             for (var j = 0; j < suffixLength; j++) {
                 if (i + j == randomIndex) {
@@ -538,7 +562,16 @@ export default class Store {
         if (item.prefixes.length == 0 && item.suffixes.length == 0) {
             item.rarity = 'normal'
         }
-        await callback({ ...item })
+
+        // Save
+        db.transaction(tx => {
+            tx.executeSql(
+                `update items set item_base=?, name=?, rarity=?, endgame_tags=?, prefixes=?, suffixes=? where uid=?;`,
+                [JSON.stringify(item.item_base), item.name, item.rarity, JSON.stringify(item.endgame_tags), JSON.stringify(item.prefixes), JSON.stringify(item.suffixes), item.uid],
+                callback({ ...item }) // updates item state from perspective of user
+            );
+        });
+
         return;
     }
 
@@ -563,11 +596,11 @@ export default class Store {
         item.prefixes = []
         item.suffixes = []
         item.groups = []
+        item.name = ''
         item.rarity = 'normal'
 
         callback({ ...item })
     }
-
 
     getItem = async (item_uid, setItem) => {
         db.transaction(tx => {
@@ -602,7 +635,6 @@ export default class Store {
         });
     }
 
-
     getAllItems = async (callback) => {
         db.transaction(tx => {
             tx.executeSql(
@@ -622,6 +654,22 @@ export default class Store {
         });
     }
 
+    getRareName = () => {
+        return _names.prefixes[this.getRandRange(_names.prefixes.length)] + ' ' + _names.suffixes[this.getRandRange(_names.suffixes.length)]
+    }
+
+    generateMagicName = async (item, callback) => {
+        let prefixName = ''
+        let suffixName = ''
+
+        // Temporary until affix name is included via the python scripts
+        item.name = 
+            _names.prefixes[this.getRandRange(_names.prefixes.length)] 
+            + ' ' + item.item_base.name + ' of '
+            + _names.suffixes[this.getRandRange(_names.suffixes.length)]
+        callback({...item})
+    }
+
     // Helper functions
     getRandRangeTwo = () => {
         return Math.floor(Math.random() * Math.floor(2)) + 1;
@@ -639,10 +687,7 @@ export default class Store {
         return min + (Math.floor(Math.random() * Math.floor(max + 1 - min)));
     }
 
-
-    // Helper functions
-
-    // Returns a unique ID as a string.
+    // Returns a unique ID as string.
     getUniqueID = async () => {
         try {
             let value = null;
@@ -662,41 +707,13 @@ export default class Store {
         }
     }
 
-
     nukeDatabase = async () => {
+        console.log('Nuclear launch detected...')
         db.transaction(tx => {
             tx.executeSql("drop table if exists app_metadata;");
             tx.executeSql("drop table if exists items;");
         });
         await AsyncStorage.clear();
-    }
-
-
-    printAllTables = async () => {
-        db.transaction(tx => {
-            tx.executeSql(
-                `select * from sqlite_master where type='table';`,
-                [],
-                (_, { rows: { _array } }) => { console.log(_array) },
-                Store.fail
-            );
-        });
-    }
-
-
-    printAllItems = async () => {
-        db.transaction(tx => {
-            tx.executeSql(
-                `select * from items;`,
-                [],
-                (_, { rows: { _array } }) => {
-                    for (var i = 0; i < _array.length; i++) {
-                        _array[i]['item_base'] = JSON.parse(_array[i]['item_base'])
-                    }
-                },
-                Store.fail
-            );
-        });
     }
 
     static success() {

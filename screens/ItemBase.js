@@ -7,8 +7,6 @@ import base_items from '../data/base_items';
 
 export function ItemBase(props) {
 
-    // const []
-
     const navigateToEndgameSelection = (base) => {
         props.navigation.navigate('ItemEndgameSelection', {'item_base':base});
     }

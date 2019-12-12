@@ -1,11 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BackHandler, Image, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import { AppBar, Button, Colors, DarkTheme, Provider as PaperProvider } from 'react-native-paper';
-import { HomeBottomAppBar, HomeTopAppBar } from '../components/HomeAppBar';
-import { Feed } from '../components/Feed';
-import { ItemHeader } from '../components/ItemHeader';
+import { BackHandler, Image, ImageBackground, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import { AppBar, BottomNavigation, Button, Colors, DarkTheme, Provider as PaperProvider } from 'react-native-paper';
+import { TrayOrbs } from './TrayOrbs' 
+import { TraySearch } from './TraySearch'
+import { TrayPinned } from './TrayPinned'
 
 export function CurrencyTray(props) {
+    console.log(props)
+
+    const changeCurrencyGroup = (group) => {
+        group == 'orb' || group == 'search' || group == 'pinned'
+            ?   props.setCurrencyGroup(group)
+            :   null
+    }
 
     function pressed(currency) {
         if (currency == props.currencySelected) {
@@ -17,57 +24,59 @@ export function CurrencyTray(props) {
     }
 
     return (
-        <View style={styles.background}>
+        <ImageBackground 
+            source={require('../img/frame/currency_tray_background.png')} 
+            style={styles.background}
+            imageStyle={{ resizeMode: 'stretch' }}>
+            
             <View style={styles.row}>
-                <TouchableOpacity style={(props.currencySelected == 'transmutation') ? styles.on : styles.off} onPress={() => pressed('transmutation')}>
-                    <Image source={require('../img/images/CurrencyUpgradeToMagic.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={(props.currencySelected == 'augmentation') ? styles.on : styles.off} onPress={() => pressed('augmentation')}>
-                    <Image source={require('../img/images/CurrencyAddModToMagic.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={(props.currencySelected == 'alteration') ? styles.on : styles.off} onPress={() => pressed('alteration')}>
-                    <Image source={require('../img/images/CurrencyRerollMagic.png')} />
-                </TouchableOpacity>
+                <Button onPress={()=>changeCurrencyGroup('orb')}>orbs</Button>
+                <Button onPress={()=>changeCurrencyGroup('search')}>search</Button>
+                <Button onPress={()=>changeCurrencyGroup('pinned')}>pinned</Button>
             </View>
-            <View style={styles.row}>
-                <TouchableOpacity style={(props.currencySelected == 'regal') ? styles.on : styles.off} onPress={() => pressed('regal')}>
-                    <Image source={require('../img/images/CurrencyUpgradeMagicToRare.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={(props.currencySelected == 'alchemy') ? styles.on : styles.off} onPress={() => pressed('alchemy')}>
-                    <Image source={require('../img/images/CurrencyUpgradeToRare.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={(props.currencySelected == 'chaos') ? styles.on : styles.off} onPress={() => pressed('chaos')}>
-                    <Image source={require('../img/images/CurrencyRerollRare.png')} />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.row}>
-                <TouchableOpacity style={(props.currencySelected == 'annul') ? styles.on : styles.off} onPress={() => pressed('annul')}>
-                    <Image source={require('../img/images/AnnullOrb.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={(props.currencySelected == 'exalt') ? styles.on : styles.off} onPress={() => pressed('exalt')}>
-                    <Image source={require('../img/images/CurrencyAddModToRare.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={(props.currencySelected == 'scour') ? styles.on : styles.off} onPress={() => pressed('scour')}>
-                    <Image source={require('../img/images/CurrencyConvertToNormal.png')} />
-                </TouchableOpacity>
-            </View>
-        </View>
+
+            {props.currencyGroup == 'orb'
+                ?   <TrayOrbs 
+                        currencySelected={props.currencySelected}
+                        pressed={pressed}
+                    />
+                :   props.currencyGroup == 'search'
+                    ?   <TraySearch
+                            currencySelected={props.currencySelected}
+                            pressed={pressed}
+                        />
+                    :   props.currencyGroup == 'pinned'
+                        ?   <TrayPinned
+                                currencySelected={props.currencySelected}
+                                pressed={pressed}
+                            />
+                        :   null
+            }
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#1E2126'
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
     },
     row: {
         flex: 1,
         flexDirection: 'row',
+        justifyContent: 'space-evenly'
+        // alignContent: 'flex-start'
+    },
+    socket: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     on: {
-        backgroundColor: Colors.blue600,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.red900,
+        borderRadius: 20,
     },
     off: {
         // backgroundColor: 'black'

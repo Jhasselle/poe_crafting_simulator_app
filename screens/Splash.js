@@ -1,20 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StatusBar} from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { ActivityIndicator, Colors } from 'react-native-paper';
 import { DarkTheme, Text, Provider as PaperProvider } from 'react-native-paper';
+import * as Font from 'expo-font';
+
+StatusBar.setHidden(true, 'none');
 
 const goHome = StackActions.reset({
     index: 0,
     actions: [NavigationActions.navigate({ routeName: 'Home' })],
 });
 
-
 export function Splash(props) {
 
+    const [fontIsLoad, setFontIsLoaded] = useState(false)
+
     useEffect(() => {
-        props.navigation.dispatch(goHome);
-    }, []);
+        const loadFont = async () => {
+            await Font.loadAsync({
+                'Fontin-SmallCaps': require('../assets/fonts/FontinSmallCaps.ttf'),
+            });
+            setFontIsLoaded(true)
+        }
+        loadFont()
+    }, [])
+
+    useEffect(() => {
+        console.log(fontIsLoad)
+        fontIsLoad 
+            ?   props.navigation.dispatch(goHome)
+            :   null
+    }, [fontIsLoad]);
     
 
     return (
