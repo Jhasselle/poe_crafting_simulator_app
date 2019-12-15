@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { BackHandler, TouchableHighlight, TouchableOpacity, Image, ImageBackground, StyleSheet, View } from 'react-native';
+import { BackHandler, Dimensions, TouchableHighlight, TouchableOpacity, Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { AppBar, Button, Colors, DarkTheme, Text, Provider as PaperProvider } from 'react-native-paper';
 import { useNavigation, useFocusEffect, useFocusState} from 'react-navigation-hooks'
 import { HomeBottomAppBar, HomeTopAppBar } from '../components/HomeAppBar';
@@ -55,7 +55,7 @@ export function ItemCraft(props) {
                 {/* Top Info */}
                 <TouchableOpacity 
                     style={styles.ItemContainer} 
-                    activeOpacity={0.8}
+                    activeOpacity={0.9}
                     onPress={useCurrency}>
 
                     <View style={styles.itemBox}>
@@ -65,22 +65,22 @@ export function ItemCraft(props) {
                         <Text>Prefixes</Text>
                         { item && item.prefixes ? 
                             item.prefixes.map((prefix) => 
-                                prefix.rolls.description.text.map((line) => 
-                                    <Text style={styles.prefix} key={line}>{line}</Text>
+                                prefix.rolls.description.text.map((line, index) => 
+                                    <Text style={styles.prefix} key={index}>{line}</Text>
                         )): null}
 
 
                         <Text>Suffixes</Text>
                         {item && item.suffixes ? 
                             item.suffixes.map((suffix) =>
-                                suffix.rolls.description.text.map((line) => 
-                                    <Text style={styles.suffix} key={line}>{line}</Text>
+                                suffix.rolls.description.text.map((line, index) => 
+                                    <Text style={styles.suffix} key={index}>{line}</Text>
                         )): null}
 
 
                         <View style={styles.itemImageBox}>
                             <Image 
-                                style={{position: 'absolute'}} 
+                                style={styles.image} 
                                 source={require('../img/frame/item_socket.png')} 
                             />
                             {   itemImage 
@@ -157,8 +157,13 @@ ItemCraft.navigationOptions = ({ navigation }) => {
     };
 }
 
-
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
+    image: {
+        position: 'absolute',
+        width: width
+    },
     background: {
         flexDirection: 'column',
         flex: 1,
@@ -179,23 +184,25 @@ const styles = StyleSheet.create({
     },
     itemImageBox: {
         position: 'absolute', 
-        top: '50%', 
+        top: '55%', 
         left: 0, 
         right: 0, 
         bottom: 0, 
         justifyContent: 'center', 
-        alignContent: 'stretch',
+        alignContent: 'center',
         alignItems: 'center',
     },
     prefix: {
         fontFamily: 'Fontin-SmallCaps',
-        fontSize: 18,
-        color: Colors.cyan200
+        fontSize: 17,
+        color: 'rgba(136, 136, 255, 1)',
+        textAlign: 'center'
     },
     suffix: {
         fontFamily: 'Fontin-SmallCaps',
-        fontSize: 18,
-        color: Colors.deepOrange200
+        fontSize: 17,
+        color: 'rgba(136, 136, 255, 1)',
+        textAlign: 'center'
     },
     crafted:{
         fontFamily: 'Fontin-SmallCaps',

@@ -6,7 +6,6 @@ import { TraySearch } from './TraySearch'
 import { TrayPinned } from './TrayPinned'
 
 export function CurrencyTray(props) {
-    console.log(props)
 
     const changeCurrencyGroup = (group) => {
         group == 'orb' || group == 'search' || group == 'pinned'
@@ -30,9 +29,9 @@ export function CurrencyTray(props) {
             imageStyle={{ resizeMode: 'stretch' }}>
             
             <View style={styles.row}>
-                <Button onPress={()=>changeCurrencyGroup('orb')}>orbs</Button>
-                <Button onPress={()=>changeCurrencyGroup('search')}>search</Button>
-                <Button onPress={()=>changeCurrencyGroup('pinned')}>pinned</Button>
+                <Button onPress={()=>changeCurrencyGroup('orb')}></Button>
+                {/* <Button onPress={()=>changeCurrencyGroup('search')}>search</Button>
+                <Button onPress={()=>changeCurrencyGroup('pinned')}>pinned</Button> */}
             </View>
 
             {props.currencyGroup == 'orb'

@@ -1,53 +1,79 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions, TouchableHighlight, StyleSheet, ImageBackground, Image, View } from 'react-native';
-import { Avatar, Text, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Avatar, Text, Button, Card, Checkbox, Title, Paragraph } from 'react-native-paper';
 import img_dictionary from '../data/img_dictionary'
 import { ItemHeader } from '../components/ItemHeader';
 
-export function BaseItemCard({item, navigation}) {
-    useEffect(()=>{
-    })
-        
+export function BaseItemCard({ navigation, item, inEditMode, selectItem}) {
+
+    const [isSelected, setIsSelected] = useState(false)
+
+
+    useEffect(() => {
+        setIsSelected(false)
+    },[inEditMode])
+
+    const card_press = () => {
+        if (inEditMode) {
+            setIsSelected(!isSelected)
+            selectItem(item.uid)
+        } 
+        else {
+            navigation.navigate('Loading', { 'item_uid': item.uid })
+        }
+    }
+
     return (
-        <TouchableHighlight 
-            onPress={() => navigation.navigate('Loading', {'item_uid': item.uid})}
-            style={styles.center}>
-            
-            <ImageBackground 
-                source={img_dictionary['item-feed-background']} 
+        <TouchableHighlight
+            onPress={card_press}
+            style={styles.buttonWrapper}>
+            <>
+            {inEditMode
+                ? <View >
+                    <Checkbox 
+                      status={isSelected ? 'checked' : 'unchecked'}
+                    />
+                </View>
+                : null}
+
+            <ImageBackground
+                source={img_dictionary['item-feed-background']}
                 style={styles.center}
                 imageStyle={{ resizeMode: 'stretch' }}>
 
-            <Card style={{backgroundColor: 'rgba(0, 0, 0, 0.0)'}}>
-                <Card.Title 
-                    styles={{paddingRight: 40}}
-                    title={
-                        <Text style={styles.text}>
-                            {item.rarity == 'rare'
-                                ?   item.name + ' ' + item.item_base.name
-                                :   item.rarity == 'magic'
-                                    ?   item.name
-                                    :   item.rarity == 'normal'
-                                        ? item.item_base.name
-                                        : null
-                            }
-                        </Text>
-                    } 
-                    subtitle={item.item_base.item_class}
-                    right={() => <View style={{paddingRight: 20}}>
-                        {item.endgame_tags.length >= 1 
-                            ? <Image source={img_dictionary[item.endgame_tags[0]]}/>
-                            : null
+
+                <Card style={{ backgroundColor: 'rgba(0, 0, 0, 0.0)' }}>
+                    <Card.Title
+                        styles={{ paddingRight: 40 }}
+                        title={
+                            <Text style={styles.text}>
+                                {item.rarity == 'rare'
+                                    ? item.name + ' ' + item.item_base.name
+                                    : item.rarity == 'magic'
+                                        ? item.name
+                                        : item.rarity == 'normal'
+                                            ? item.item_base.name
+                                            : null
+                                }
+                            </Text>
                         }
-                        {item.endgame_tags.length == 2 
-                            ? <Image source={img_dictionary[item.endgame_tags[1]]}/>
-                            : null
+                        subtitle={item.item_base.item_class}
+                        right={() =>
+                            <View style={{ paddingRight: 20 }}>
+                                {item.endgame_tags.length >= 1
+                                    ? <Image source={img_dictionary[item.endgame_tags[0]]} />
+                                    : null
+                                }
+                                {item.endgame_tags.length == 2
+                                    ? <Image source={img_dictionary[item.endgame_tags[1]]} />
+                                    : null
+                                }
+                            </View>
                         }
-                    </View>
-                    } 
-                />
+                    />
                 </Card>
             </ImageBackground>
+            </>
         </TouchableHighlight>
     );
 }
@@ -61,6 +87,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     center: {
+        flex: 6,
+        alignItems: 'stretch',
+        justifyContent: 'center',
+    },
+    buttonWrapper: {
+        flexDirection: 'row',
         flex: 6,
         alignItems: 'stretch',
         justifyContent: 'center',

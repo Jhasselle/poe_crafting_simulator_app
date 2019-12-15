@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Appbar, Button, Text } from 'react-native-paper';
+import { Appbar, Button, DarkTheme, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
 
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        backgroundColor: DarkTheme.colors.surface
     },
     title: {
         fontFamily: 'Fontin-SmallCaps',

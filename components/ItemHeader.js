@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, ImageBackground, TouchableOpacity, StyleSheet, Text, View, Button, Image } from 'react-native';
 import img_dictionary from '../data/img_dictionary';
+import { Colors } from 'react-native-paper';
 
 export function ItemHeader({item}) {
 
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     rare: {
         fontFamily: 'Fontin-SmallCaps',
         fontSize: 20,
-        color: 'yellow'
+        color: Colors.yellow300
     },
     
 });

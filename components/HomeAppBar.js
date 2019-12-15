@@ -1,16 +1,57 @@
-import * as React from 'react';
-import { Appbar } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, TouchableHighlight } from 'react-native';
+import { Appbar, Button, DarkTheme, IconButton } from 'react-native-paper';
+import { useFocusEffect } from 'react-navigation-hooks';
 
+export function HomeBottomAppBar({ navigation, inEditMode, setInEditMode, deleteItems}) {
 
-export function HomeBottomAppBar(props) {
+    useEffect(()=>{
+
+    }, [inEditMode])
+    
+    const confirm_delete = () => {
+        setInEditMode(false)
+    }
+
     return (
+
         <Appbar style={styles.bottom}>
-            <Appbar.Action icon="plus" onPress={() => props.navigation.navigate('ItemBase')} />
-            <Appbar.Action icon="delete" onPress={() => console.log('Pressed delete')} />
+            {
+                inEditMode
+                    ? <>
+                    {/* cancel */}
+                        <IconButton
+                            icon="cancel"
+                            onPress={() => setInEditMode(false)}
+                            style={styles.iconButton}
+                        />
+                     {/* confirm delete */}
+                        <IconButton
+                            icon="check"
+                            onPress={deleteItems}
+                            style={styles.iconButton}
+                        />
+                    </>
+
+                    : <>
+                        <IconButton
+                            icon="plus"
+                            onPress={() => navigation.navigate('ItemBase')}
+                            style={styles.iconButton}
+                        />
+                        <IconButton
+                            icon="delete"
+                            onPress={() => setInEditMode(true)}
+                            style={styles.iconButton}
+                        />
+                    </>
+
+
+            }
         </Appbar>
     );
 }
+
 
 
 const styles = StyleSheet.create({
@@ -19,7 +60,8 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        backgroundColor: DarkTheme.colors.surface
     },
     top: {
         position: 'absolute',
@@ -28,4 +70,7 @@ const styles = StyleSheet.create({
         top: 0,
         justifyContent: 'space-evenly'
     },
+    iconButton: {
+        flexGrow: 1
+    }
 });

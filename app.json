@@ -1,13 +1,11 @@
 {
   "expo": {
-    "name": "poe-craft",
-    "slug": "poe-craft-paper",
+    "name": "PoE Crafting Sim",
+    "slug": "poe_crafting_sim",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,6 +23,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.hasselle.poe_crafting_sim"
     }
   }
 }

@@ -6,6 +6,7 @@ import { Home } from './screens/Home';
 import { ItemBase } from './screens/ItemBase';
 import { ItemEndgameSelection } from './screens/ItemEndgameSelection'
 import { ItemCraft } from './screens/ItemCraft';
+import { About } from './screens/About';
 // import { StoreTest } from './screens/StoreTest';
 
 const AppNavigator = createStackNavigator({
@@ -23,9 +24,9 @@ const AppNavigator = createStackNavigator({
         },
         Home: {
             screen: Home,
-            navigationOptions: {
-                header: null,
-            }
+            // navigationOptions: {
+            //     header: null,
+            // }
         },
         ItemBase: {
             screen: ItemBase
@@ -38,6 +39,9 @@ const AppNavigator = createStackNavigator({
             navigationOptions: {
                 header: null,
             }
+        },
+        About: {
+            screen: About
         },
         
     },

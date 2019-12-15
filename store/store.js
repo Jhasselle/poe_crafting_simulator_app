@@ -295,7 +295,6 @@ export default class Store {
                     if (!item.groups.includes(Store.possibleMods.prefixes.prefixArray[i].mod.group)) {
     
                         let newAffix = Store.possibleMods.prefixes.prefixArray[i].mod
-                        // console.log(Store.possibleMods.prefixes.prefixArray[i])
                         let stats = this.rollModStats(newAffix)
     
                         newAffix['rolls'] = stats;
@@ -388,14 +387,15 @@ export default class Store {
 
                     rolls.push(roll)
                 }
-
                 descriptions.text.push(_stats[mod.stats[i].id].English[0].string)
             }
             descriptions.rolls = rolls
         }
 
+
         if (descriptions.text.length >= 1) {
             if (descriptions.rolls.length == 1) {
+               
                 switch(_stats[mod.stats[0].id].English[0].format[0]) {
                     case '+#%': 
                         descriptions.text[0] = descriptions.text[0].replace('{0}', '+' + descriptions.rolls[0] + '%')
@@ -406,15 +406,48 @@ export default class Store {
                     default: 
                         descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
                 }
+                
             }
             else if (descriptions.rolls.length == 2) {
-                descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
-                descriptions.text[0] = descriptions.text[0].replace('{1}', descriptions.rolls[1])
+                if (descriptions.rolls[1] == 0) {
+                    descriptions.text.pop()
+                }
+                    descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
+                    descriptions.text[0] = descriptions.text[0].replace('{1}', descriptions.rolls[1])
+                    if (descriptions.text.length > 1) {
+                        if (_stats[mod.stats[0].id].English[0].format == '#') {
+                            descriptions.text[1] = descriptions.text[1].replace('{0}', + descriptions.rolls[1])
+                        }
+                        else {
+                            descriptions.text[1] = descriptions.text[1].replace('{0}', '+' + descriptions.rolls[1])
+                        }
+                    }
             }
-        }
-        if (descriptions.text.length == 2) {
-            // console.log('hmmm', _stats[mod.stats[0].id].English[0])
-        }
+            else if (descriptions.rolls.length == 3) {
+                console.log(descriptions)
+                console.log(mod.stats)
+                console.log(_stats[mod.stats[0].id].English[0].format)
+
+
+                if (_stats[mod.stats[0].id].English[0].format.length == 2 && _stats[mod.stats[0].id].English[0].format[0] != 'ignore') {
+                    if (_stats[mod.stats[0].id].English[0].format[1] != 'ignore') {
+                        descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
+                        descriptions.text[0] = descriptions.text[0].replace('{1}', descriptions.rolls[1])
+                        descriptions.text[1] = descriptions.text[1].replace('{0}', + descriptions.rolls[2]) 
+                    }
+                    else {
+                        descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
+                        descriptions.text[1] = descriptions.text[1].replace('{0}', descriptions.rolls[1])
+                        descriptions.text[1] = descriptions.text[1].replace('{1}', + descriptions.rolls[2]) 
+                    }   
+                }
+                else {
+                    descriptions.text[0] = descriptions.text[0].replace('{0}', descriptions.rolls[0])
+                    descriptions.text[1] = descriptions.text[1].replace('{0}', descriptions.rolls[1])
+                    descriptions.text[1] = descriptions.text[1].replace('{1}', + descriptions.rolls[2])
+                }
+            }
+        }       
 
         let stat = {
             'description': descriptions,
@@ -659,14 +692,17 @@ export default class Store {
     }
 
     generateMagicName = async (item, callback) => {
-        let prefixName = ''
-        let suffixName = ''
+        let result = item.item_base.name
 
-        // Temporary until affix name is included via the python scripts
-        item.name = 
-            _names.prefixes[this.getRandRange(_names.prefixes.length)] 
-            + ' ' + item.item_base.name + ' of '
-            + _names.suffixes[this.getRandRange(_names.suffixes.length)]
+        item.prefixes.length == 1
+            ?   result = item.prefixes[0].name + ' ' + result
+            :   null
+
+        item.suffixes.length == 1
+            ?   result = result + ' ' + item.suffixes[0].name
+            :   null
+
+        item.name = result           
         callback({...item})
     }
 
@@ -705,6 +741,32 @@ export default class Store {
         catch (error) {
             console.log(error)
         }
+    }
+
+    deleteItems = async (selectedItems, setItems) => {
+        db.transaction(tx => {
+            for (let i = 0; i < selectedItems.length; i++){
+                tx.executeSql(
+                    "delete from items where uid=?;",
+                    [selectedItems[i]]
+                )
+            }
+            tx.executeSql(
+                `select * from items;`,
+                [],
+                (_, { rows: { _array } }) => {
+                    for (var i = 0; i < _array.length; i++) {
+                        _array[i]['endgame_tags'] = JSON.parse(_array[i]['endgame_tags'])
+                        _array[i]['item_base'] = JSON.parse(_array[i]['item_base'])
+                        _array[i]['prefixes'] = JSON.parse(_array[i]['prefixes'])
+                        _array[i]['suffixes'] = JSON.parse(_array[i]['suffixes'])
+                    }
+                    setItems(_array)
+                },
+                Store.fail
+            );
+        });
+        
     }
 
     nukeDatabase = async () => {

@@ -10,7 +10,9 @@ export function Home(props) {
 
     const store = Store.getInstance()
     const [items, setItems] = useState(null)
-
+    const [inEditMode, setInEditMode] = useState(false)
+    const [selectedItems, setSelectedItems] = useState([])
+    
     useEffect(()=>{
         // store.nukeDatabase()
         props.navigation.addListener( 
@@ -22,25 +24,71 @@ export function Home(props) {
         store.getAllItems(setItems)
     },[props])
 
+    useEffect(()=> {
+        setSelectedItems([])
+    }, [inEditMode])
+
+    function deleteItems() {
+        console.log('deleteItems()')
+        store.deleteItems(selectedItems, setItems)
+        setInEditMode(false)
+        setSelectedItems([])
+    }
+
     return (
         <PaperProvider theme={DarkTheme}>
-                <HomeHeader />
+                {/* <HomeHeader /> */}
                 <View style={styles.background}>
-                    <Feed items={items} navigation={props.navigation}/>
-                    {/* for debugging */}
-                    {/* <Button color={Colors.red600} onPress={()=> store.nukeDatabase()}>nuke</Button> */}
+                    <Feed             
+                        navigation={props.navigation}
+                        items={items} 
+                        inEditMode={inEditMode}
+                        selectedItems={selectedItems}
+                        setSelectedItems={setSelectedItems}
+                        />
                 </View>
-                <HomeBottomAppBar navigation={props.navigation}/>
+                <HomeBottomAppBar 
+                    inEditMode={inEditMode}
+                    setInEditMode={setInEditMode}
+                    navigation={props.navigation}
+                    deleteItems={deleteItems}
+                />
         </PaperProvider>
     );
+}
+
+Home.navigationOptions = ({ navigation }) => {
+    return {
+        headerTitle: () => 
+        <>
+            <Text 
+                style={{
+                    flex: 2,
+                    fontSize: 24,
+                    fontFamily: 'Fontin-SmallCaps',
+                    color: 'white'
+                }}>
+                    PoE Crafting Sim
+            </Text>
+            <Button 
+                onPress={() => navigation.navigate('About')}
+                style={{flex:1}}
+                color={DarkTheme.colors.primary} >
+                    about
+            </Button>
+        </>, 
+        headerStyle: {
+            backgroundColor: DarkTheme.colors.surface,
+        },
+        headerLeft: () => <View></View>
+
+    };
 }
 
 const styles = StyleSheet.create({
     background: {
         flex: 1,
         flexDirection: 'column',
-        paddingTop: 50,
-        paddingBottom: 50,
         backgroundColor: '#1E2126'
     },
 });
